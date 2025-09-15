@@ -29,10 +29,13 @@ body {
 
 .btn-simulador {
   cursor: pointer;
-  font-family:  "Jim Nightshade", cursive;
-  padding: 10px 20px; /* Mesmo padding do botão logout */
-  font-weight: 900;   /* Igual ao logout */
-  font-size: 1.1rem;  /* Igual ao logout */
+  font-family: "Jim Nightshade", cursive;
+  padding: 10px 20px;
+  /* Mesmo padding do botão logout */
+  font-weight: 900;
+  /* Igual ao logout */
+  font-size: 1.1rem;
+  /* Igual ao logout */
   background-color: #000;
   color: #fff;
   border: none;
@@ -61,7 +64,7 @@ body {
 
 .menu-simulador button {
   background-color: #222;
-  font-family:  "Jim Nightshade", cursive;
+  font-family: "Jim Nightshade", cursive;
   color: #ffbf00;
   border: none;
   padding: 8px 12px;
@@ -80,7 +83,7 @@ body {
 
 .btn-logout {
   cursor: pointer;
-  font-family:  "Jim Nightshade", cursive;
+  font-family: "Jim Nightshade", cursive;
   padding: 10px 20px;
   font-weight: 900;
   font-size: 1.1rem;
@@ -90,6 +93,7 @@ body {
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
+
 .btn-logout:hover {
   background-color: #ffffff;
   color: #000;
@@ -147,9 +151,14 @@ body {
 }
 
 .atributo h2 {
-  border-bottom: none;
-  margin-bottom: 10px;
   font-family: "Cormorant Unicase", serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  /* mantém tamanho atual */
+  margin: 0;
+  /* remove margem para alinhar melhor */
+  flex-shrink: 0;
+  /* evita que o título encolha */
 }
 
 .atributo label {
@@ -163,21 +172,13 @@ body {
 .titulo-impulsos-container {
   display: flex;
   align-items: center;
-  gap: 95px; /* Espaço entre título e impulsos */
+  gap: 95px;
+  /* Espaço entre título e impulsos */
   margin-bottom: 10px;
-    border-bottom: 1px solid #000; /* linha que separa título + impulsos do conteúdo */
-  padding-bottom: 5px; /* espaçamento interno para a linha não colar no texto */
-}
-
-/* Mantém o estilo atual do título */
-.atributo h2 {
-  font-family: "Cormorant Unicase", serif;
-  font-weight: 700;
-  font-size: 1.5rem; /* mantém tamanho atual */
   border-bottom: 1px solid #000;
-  margin: 0; /* remove margem para alinhar melhor */
+  /* linha que separa título + impulsos do conteúdo */
   padding-bottom: 5px;
-  flex-shrink: 0; /* evita que o título encolha */
+  /* espaçamento interno para a linha não colar no texto */
 }
 
 /* Container dos impulsos */
@@ -187,7 +188,7 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   /* opcional: limite máximo de largura para não estourar */
-  max-width: 180px;
+  max-width: 170px;
 }
 
 /* Estilo dos checkboxes impulsos - bolinhas mais estreitas */
@@ -196,10 +197,13 @@ body {
   -moz-appearance: none;
   appearance: none;
 
-  width: 14px;   /* um pouco mais estreito que o padrão 20px */
-  height: 20px;  /* um pouco mais alto que o padrão 18px */
+  width: 14px;
+  /* um pouco mais estreito que o padrão 20px */
+  height: 20px;
+  /* um pouco mais alto que o padrão 18px */
   border: 2px solid #000;
-  border-radius: 50%; /* mantém formato circular */
+  border-radius: 50%;
+  /* mantém formato circular */
   background-color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -220,7 +224,8 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 50%; /* Transforma em círculo */
+  border-radius: 50%;
+  /* Transforma em círculo */
   width: 15px;
   height: 18px;
   border: 2px solid #000000;
@@ -235,7 +240,7 @@ body {
 }
 
 .atributo input[type=checkbox] {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   /* Define tamanho e formato circular */
@@ -252,8 +257,10 @@ body {
 }
 
 .atributo input[type="checkbox"]:checked {
-  background-color: #000; /* Preenchido de preto */
-  border-color: #000; /* Borda preta */
+  background-color: #000;
+  /* Preenchido de preto */
+  border-color: #000;
+  /* Borda preta */
 }
 
 .small {
@@ -300,11 +307,16 @@ body {
 }
 
 .header-black {
-  background-color: #000; /* Cor de fundo preta */
-  color: #fff; /* Cor do texto branca */
-  padding: 10px 20px; /* Espaçamento interno */
-  text-align: center; /* Centraliza o texto */
-  margin-bottom: 20px; /* Adiciona um espaço abaixo do cabeçalho */
+  background-color: #000;
+  /* Cor de fundo preta */
+  color: #fff;
+  /* Cor do texto branca */
+  padding: 10px 20px;
+  /* Espaçamento interno */
+  text-align: center;
+  /* Centraliza o texto */
+  margin-bottom: 20px;
+  /* Adiciona um espaço abaixo do cabeçalho */
 }
 
 /* Estilo para o controle de máximo de marcas */
@@ -337,16 +349,16 @@ body {
   background-color: #ffbf00;
   color: #000;
   border-color: #000;
-  
+
 }
 
 input[type=number] {
--moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 
 
@@ -355,22 +367,26 @@ input[type=number]::-webkit-outer-spin-button {
     transform: scale(0);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
+
 /* Animação para o checkbox desaparecer */
 @keyframes desaparecerMarca {
   from {
     transform: scale(1);
     opacity: 1;
   }
+
   to {
     transform: scale(0);
     opacity: 0;
   }
 }
+
 /* Aplica a animação quando o checkbox é inserido */
 .marcas-lista li {
   display: inline-block;
@@ -409,30 +425,39 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Opcional: Adicionar um espaçamento dentro de cada categoria */
 .categoria {
-  padding: 0 15px; /* Adiciona um espaço nas laterais para melhor visualização */
+  padding: 0 15px;
+  /* Adiciona um espaço nas laterais para melhor visualização */
 }
 
 .header-black h2 {
-  font-size: 1.5rem; /* Tamanho da fonte do título */
-  margin: 0; /* Remove a margem padrão do <h2> para ficar alinhado */
+  font-size: 1.5rem;
+  /* Tamanho da fonte do título */
+  margin: 0;
+  /* Remove a margem padrão do <h2> para ficar alinhado */
 }
 
 .categoria {
-  margin-bottom: 20px; /* Aumenta o espaço entre as categorias */
+  margin-bottom: 20px;
+  /* Aumenta o espaço entre as categorias */
 }
 
 .categoria h3 {
   font-size: 1.2rem;
-  color: #ffffff; /* Uma cor mais escura para o título da categoria */
-  margin-bottom: 10px; /* Espaço abaixo do título da categoria */
+  color: #ffffff;
+  /* Uma cor mais escura para o título da categoria */
+  margin-bottom: 10px;
+  /* Espaço abaixo do título da categoria */
 }
 
 .categoria ul {
-  list-style: none; /* Remove os marcadores padrão da lista (bolinhas ou números) */
+  list-style: none;
+  /* Remove os marcadores padrão da lista (bolinhas ou números) */
   padding: 0;
   margin: 0;
-  display: flex; /* Alinha os checkboxes horizontalmente */
-  gap: 10px; /* Adiciona um espaço entre eles */
+  display: flex;
+  /* Alinha os checkboxes horizontalmente */
+  gap: 10px;
+  /* Adiciona um espaço entre eles */
 }
 
 /* .categoria li {
@@ -444,11 +469,13 @@ input[type=number]::-webkit-outer-spin-button {
   width: 20px;
   height: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px; /* Deixa as bordas arredondadas */
+  border-radius: 5px;
+  /* Deixa as bordas arredondadas */
 }
 
 .categoria input[type="checkbox"]:checked {
-  background-color: #555; /* Muda a cor de fundo quando marcado */
+  background-color: #555;
+  /* Muda a cor de fundo quando marcado */
 }
 
 .cicatrizes p {
@@ -470,48 +497,60 @@ input[type=number]::-webkit-outer-spin-button {
 .section.marcas,
 .subsection.relacionamentos,
 .subsection.equipamento {
-  display: inline-block; /* Para respeitar largura e alinhamento */
-  vertical-align: top;   /* Alinha pelo topo */
+  display: inline-block;
+  /* Para respeitar largura e alinhamento */
+  vertical-align: top;
+  /* Alinha pelo topo */
   box-sizing: border-box;
   padding: 10px;
-  background-color: #0a0a0a; /* Para marcas, ajuste para as outras se quiser */
+  background-color: #0a0a0a;
+  /* Para marcas, ajuste para as outras se quiser */
   border: 1px solid black;
   font-family: "Cormorant Unicase", serif;
   font-size: 12px;
-  max-height: 300px; /* Limita altura para scroll */
+  max-height: 300px;
+  /* Limita altura para scroll */
   overflow-y: auto;
 }
 
 /* Larguras proporcionais para as seções */
 .section.marcas {
-   max-height: 400px; /* ou a altura que desejar */
-  min-height: 400px; /* força altura mínima igual */
+  max-height: 400px;
+  /* ou a altura que desejar */
+  min-height: 400px;
+  /* força altura mínima igual */
   width: 30%;
   margin-right: 1.5%;
-    max-height: 400px;
+  max-height: 400px;
   padding: 15px;
   overflow-y: auto;
 }
 
 .subsection.relacionamentos {
-    max-height: 400px; /* ou a altura que desejar */
-  min-height: 400px; /* força altura mínima igual */
+  max-height: 400px;
+  /* ou a altura que desejar */
+  min-height: 400px;
+  /* força altura mínima igual */
   padding: 15px;
   overflow-y: auto;
   width: 33%;
   margin-right: 1.5%;
-  background-color: #f5f5f5; /* Ajuste para diferenciar visualmente */
+  background-color: #f5f5f5;
+  /* Ajuste para diferenciar visualmente */
   border: 1px solid #000;
   color: #000;
 }
 
 .subsection.equipamento {
-      max-height: 400px; /* ou a altura que desejar */
-  min-height: 400px; /* força altura mínima igual */
+  max-height: 400px;
+  /* ou a altura que desejar */
+  min-height: 400px;
+  /* força altura mínima igual */
   padding: 15px;
   overflow-y: auto;
   width: 33%;
-  background-color: #f5f5f5; /* Ajuste para diferenciar visualmente */
+  background-color: #f5f5f5;
+  /* Ajuste para diferenciar visualmente */
   border: 1px solid #000;
   color: #000;
 }
@@ -519,7 +558,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* Ajusta inputs para ocupar toda largura dentro das listas */
 .lista-relacionamento input[type="text"],
 .lista-equipamento input[type="text"] {
-   width: 100%;
+  width: 100%;
   max-width: 500px;
   box-sizing: border-box;
 }
@@ -527,30 +566,35 @@ input[type=number]::-webkit-outer-spin-button {
 /* Limita altura das listas para scroll */
 .lista-relacionamento,
 .lista-equipamento {
-  
+
   max-height: 360px;
   overflow-y: auto;
-  padding-right: 5px; /* Para evitar sobreposição da scrollbar */
+  padding-right: 5px;
+  /* Para evitar sobreposição da scrollbar */
 }
 
 .notas-e-circulo-container {
   display: flex;
-  gap: 20px; /* Espaço entre as duas seções */
+  gap: 20px;
+  /* Espaço entre as duas seções */
   margin-top: 20px;
 }
 
 /* Ajusta as subseções para ocuparem metade da largura cada */
 .subsection.notas,
 .subsection.habilidades-circulo {
-  flex: 1; /* Cada uma ocupa 50% do container */
+  flex: 1;
+  /* Cada uma ocupa 50% do container */
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid black;
   font-family: "Cormorant Unicase", serif;
   font-size: 1rem;
   background-color: #f5f5f5;
-  max-height: 400px; /* opcional, para limitar altura */
-  overflow-y: auto;  /* scroll se necessário */
+  max-height: 400px;
+  /* opcional, para limitar altura */
+  overflow-y: auto;
+  /* scroll se necessário */
 }
 
 /* Ajusta os textareas para ocupar toda a largura da subseção */
@@ -564,28 +608,34 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1.3rem;
   border: 2px solid #000;
   resize: vertical;
-  min-height: 200px; /* opcional */
+  min-height: 200px;
+  /* opcional */
 }
 
 
 /* Estilo do modal */
 .modal-dado {
-  display: none; /* Escondido por padrão */
+  display: none;
+  /* Escondido por padrão */
   position: fixed;
-  z-index: 1000; /* Fica acima de tudo */
+  z-index: 1000;
+  /* Fica acima de tudo */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Scroll se necessário */
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
-  font-family:  "Jim Nightshade", cursive;
+  overflow: auto;
+  /* Scroll se necessário */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Fundo escuro semi-transparente */
+  font-family: "Jim Nightshade", cursive;
 }
 
 /* Conteúdo do modal */
 .modal-content {
   background-color: #000000;
-  margin: 15% auto; /* Centralizado vertical e horizontal */
+  margin: 15% auto;
+  /* Centralizado vertical e horizontal */
   padding: 20px 30px;
   border: 2px solid #000;
   width: 300px;

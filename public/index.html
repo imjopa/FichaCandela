@@ -63,7 +63,7 @@
         <!-- Botão Logout -->
         <button id="logoutBtn" class="btn-logout">Logout</button>
       </div>
-      
+
       <section id="fichasManager" class="fichas-manager">
         <h2>Minhas Fichas</h2>
         <ul id="listaFichas" class="lista-fichas">
@@ -85,13 +85,27 @@
         <!-- Corpo, Astúcia, Intuição -->
         <section class="atributos">
           <div class="atributo" id="corpo">
-            <h2>Corpo</h2>
+            <div class="titulo-impulsos-container">
+              <h2>Corpo</h2>
+              <div class="impulsos-checkboxes">
+                <input type="checkbox" name="corpo_impulso_1" />
+                <input type="checkbox" name="corpo_impulso_2" />
+                <input type="checkbox" name="corpo_impulso_3" />
+                <input type="checkbox" name="corpo_impulso_4" />
+                <input type="checkbox" name="corpo_impulso_5" />
+                <input type="checkbox" name="corpo_impulso_6" />
+                <input type="checkbox" name="corpo_impulso_7" />
+                <input type="checkbox" name="corpo_impulso_8" />
+                <input type="checkbox" name="corpo_impulso_9" />
+              </div>
+            </div>
             <label><input type="checkbox" class="mover-checkbox"> Mover <small>(Correr, Desviar, Guiar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
                 type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="mover" min="0" max="6" /> -->
             </label>
+
             <label><input type="checkbox"> Atacar <small>(Socar, Quebrar, Derrubar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
@@ -225,9 +239,15 @@
           </ul>
         </div>
 
-        <div class="subsection notas">
-          <h3>NOTAS</h3>
-          <textarea rows="5" cols="40" placeholder="Escreva suas anotações aqui..."></textarea>
+        <div class="notas-e-circulo-container">
+          <div class="subsection notas">
+            <h3>NOTAS</h3>
+            <textarea rows="5" cols="40" placeholder="Escreva suas anotações aqui..."></textarea>
+          </div>
+          <div class="subsection habilidades-circulo">
+            <h3>HABILIDADES DE CÍRCULO</h3>
+            <textarea rows="5" cols="40" placeholder="Descreva as habilidades de círculo aqui..."></textarea>
+          </div>
         </div>
         <button type="submit">Salvar Ficha</button>
       </form>

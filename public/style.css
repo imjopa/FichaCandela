@@ -29,6 +29,7 @@ body {
 
 .btn-simulador {
   cursor: pointer;
+  font-family:  "Jim Nightshade", cursive;
   padding: 10px 20px; /* Mesmo padding do botão logout */
   font-weight: 900;   /* Igual ao logout */
   font-size: 1.1rem;  /* Igual ao logout */
@@ -60,12 +61,13 @@ body {
 
 .menu-simulador button {
   background-color: #222;
+  font-family:  "Jim Nightshade", cursive;
   color: #ffbf00;
   border: none;
   padding: 8px 12px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.3rem;
   border-radius: 3px;
   transition: background-color 0.3s ease;
 }
@@ -78,6 +80,7 @@ body {
 
 .btn-logout {
   cursor: pointer;
+  font-family:  "Jim Nightshade", cursive;
   padding: 10px 20px;
   font-weight: 900;
   font-size: 1.1rem;
@@ -121,7 +124,7 @@ body {
   border: none;
   border-bottom: 1px solid #000;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   padding: 2px 4px;
   outline: none;
   font-family: "Cormorant Unicase", serif;
@@ -144,7 +147,7 @@ body {
 }
 
 .atributo h2 {
-  border-bottom: 1px solid #000;
+  border-bottom: none;
   margin-bottom: 10px;
   font-family: "Cormorant Unicase", serif;
 }
@@ -155,6 +158,61 @@ body {
   font-weight: 400;
   font-size: 1.5rem;
 }
+
+/* Container flexível para título e impulsos */
+.titulo-impulsos-container {
+  display: flex;
+  align-items: center;
+  gap: 95px; /* Espaço entre título e impulsos */
+  margin-bottom: 10px;
+    border-bottom: 1px solid #000; /* linha que separa título + impulsos do conteúdo */
+  padding-bottom: 5px; /* espaçamento interno para a linha não colar no texto */
+}
+
+/* Mantém o estilo atual do título */
+.atributo h2 {
+  font-family: "Cormorant Unicase", serif;
+  font-weight: 700;
+  font-size: 1.5rem; /* mantém tamanho atual */
+  border-bottom: 1px solid #000;
+  margin: 0; /* remove margem para alinhar melhor */
+  padding-bottom: 5px;
+  flex-shrink: 0; /* evita que o título encolha */
+}
+
+/* Container dos impulsos */
+.impulsos-checkboxes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  align-items: center;
+  /* opcional: limite máximo de largura para não estourar */
+  max-width: 180px;
+}
+
+/* Estilo dos checkboxes impulsos - bolinhas mais estreitas */
+.impulsos-checkboxes input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 14px;   /* um pouco mais estreito que o padrão 20px */
+  height: 20px;  /* um pouco mais alto que o padrão 18px */
+  border: 2px solid #000;
+  border-radius: 50%; /* mantém formato circular */
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  vertical-align: middle;
+}
+
+/* Checkbox marcado */
+.impulsos-checkboxes input[type="checkbox"]:checked {
+  background-color: #000;
+  border-color: #000;
+}
+
+
 
 /* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
 .atributo label input:first-of-type {
@@ -475,20 +533,29 @@ input[type=number]::-webkit-outer-spin-button {
   padding-right: 5px; /* Para evitar sobreposição da scrollbar */
 }
 
-/* Seção notas ocupa toda a largura abaixo */
-.subsection.notas {
-  clear: both; /* Garante que fique abaixo das seções lado a lado */
+.notas-e-circulo-container {
+  display: flex;
+  gap: 20px; /* Espaço entre as duas seções */
   margin-top: 20px;
+}
+
+/* Ajusta as subseções para ocuparem metade da largura cada */
+.subsection.notas,
+.subsection.habilidades-circulo {
+  flex: 1; /* Cada uma ocupa 50% do container */
+  box-sizing: border-box;
   padding: 10px;
   border: 1px solid black;
   font-family: "Cormorant Unicase", serif;
   font-size: 1rem;
   background-color: #f5f5f5;
+  max-height: 400px; /* opcional, para limitar altura */
+  overflow-y: auto;  /* scroll se necessário */
 }
 
-/* Ajusta textarea para ocupar toda a largura */
-.subsection.notas textarea {
-  min-height: 200px;
+/* Ajusta os textareas para ocupar toda a largura da subseção */
+.subsection.notas textarea,
+.subsection.habilidades-circulo textarea {
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
@@ -497,7 +564,9 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1.3rem;
   border: 2px solid #000;
   resize: vertical;
+  min-height: 200px; /* opcional */
 }
+
 
 /* Estilo do modal */
 .modal-dado {
@@ -510,7 +579,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   overflow: auto; /* Scroll se necessário */
   background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
-  font-family: "Cormorant Unicase", serif;
+  font-family:  "Jim Nightshade", cursive;
 }
 
 /* Conteúdo do modal */

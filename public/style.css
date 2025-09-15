@@ -430,11 +430,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .header-black h2 {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   /* Tamanho da fonte do título */
   margin: 0;
   /* Remove a margem padrão do <h2> para ficar alinhado */
 }
+
 
 .categoria {
   margin-bottom: 20px;
@@ -481,20 +482,21 @@ input[type=number]::-webkit-outer-spin-button {
 /* Container para Marcas e Cicatrizes lado a lado */
 .marcas-cicatrizes-container {
   display: flex;
-  gap: 20px;
+  gap: 15px; /* Espaço entre as sections, pode ajustar */
   margin-bottom: 30px;
+  justify-content: flex-start; /* Alinha à esquerda */
 }
 
 .section.marcas,
 .section.cicatrizes {
-  flex: 1;
+  flex: 0 0 565px; /* largura fixa de 280px, sem crescer ou encolher */
   box-sizing: border-box;
-  padding: 5px;
+  padding: 10px;
   background-color: #0a0a0a;
   border: 1px solid black;
   font-family: "Jim Nightshade", cursive;
-  font-size: 20px;
-  max-height: 400px;
+  font-size: 12px;
+  max-height: 250px;
   overflow-y: auto;
   color: white;
 }
@@ -502,11 +504,22 @@ input[type=number]::-webkit-outer-spin-button {
 .header-black {
   background-color: #000;
   color: #fff;
-  padding: 10px 20px;
+  padding: 8px 15px; /* Reduzido o padding */
   text-align: center;
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* Reduzido de 20px para 8px */
+  font-size: 1.3rem; /* Ajuste se quiser */
 }
 
+
+.marcas-conteudo,
+.cicatrizes-conteudo {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.max-marcas-control {
+  font-size: 20px;
+}
 
 /* Estilo para as linhas de cicatrizes */
 .linha-cicatriz {
@@ -557,6 +570,7 @@ input[type=number]::-webkit-outer-spin-button {
   flex: 1;
   padding: 6px 8px;
   font-family: "Cormorant Unicase", serif;
+  font-weight: 700;
   font-size: 1rem;
   border: 2px solid #000;
   border-radius: 4px;
@@ -653,6 +667,9 @@ input[type=number]::-webkit-outer-spin-button {
 /* Ajusta inputs para ocupar toda largura dentro das listas */
 .lista-relacionamento input[type="text"],
 .lista-equipamento input[type="text"] {
+  font-family: "Cormorant Unicase", serif;
+  font-weight: 700;
+  font-size: 1.1rem;
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
@@ -661,7 +678,6 @@ input[type=number]::-webkit-outer-spin-button {
 /* Limita altura das listas para scroll */
 .lista-relacionamento,
 .lista-equipamento {
-
   max-height: 360px;
   overflow-y: auto;
   padding-right: 5px;

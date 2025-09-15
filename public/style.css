@@ -20,6 +20,54 @@ body {
   gap: 15px;
 }
 
+.btn-simulador {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-simulador:hover {
+  background-color: #222;
+}
+
+.menu-simulador {
+  position: absolute;
+  background-color: #000;
+  border: 1px solid #ffbf00;
+  border-radius: 4px;
+  margin-top: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.menu-simulador button {
+  background-color: #222;
+  color: #ffbf00;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-simulador button:hover {
+  background-color: #ffbf00;
+  color: #000;
+}
+
+
 .btn-logout {
   align-self: flex-end;
   margin-bottom: 10px;
@@ -143,8 +191,6 @@ body {
   background-color: #000; /* Preenchido de preto */
   border-color: #000; /* Borda preta */
 }
-
-
 
 .small {
   font-size: 0.8rem;
@@ -443,6 +489,57 @@ input[type=number] {
   font-size: 1.3rem;
   border: 2px solid #000;
   resize: vertical;
+}
+
+/* Estilo do modal */
+.modal-dado {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 1000; /* Fica acima de tudo */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Scroll se necessário */
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  font-family: "Cormorant Unicase", serif;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto; /* Centralizado vertical e horizontal */
+  padding: 20px 30px;
+  border: 2px solid #000;
+  width: 300px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #ffbf00;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Botão fechar (X) */
+.fechar {
+  color: #000;
+  float: right;
+  font-size: 1.8rem;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fechar:hover {
+  color: #ffbf00;
+}
+
+/* Texto do resultado */
+.resultado-dado-text {
+  margin-top: 20px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffbf00;
 }
 
 

@@ -106,6 +106,65 @@ function inicializarMarcas() {
 inicializarMarcas();
 
 
+// Cria elementos para o simulador de dados
+const btnSimuladorDados = document.getElementById('btnSimuladorDados');
+const menuSimuladorDados = document.getElementById('menuSimuladorDados');
+
+btnSimuladorDados.addEventListener('click', () => {
+  // Alterna visibilidade do menu
+  if (menuSimuladorDados.style.display === 'none') {
+    menuSimuladorDados.style.display = 'flex';
+    // Posiciona o menu abaixo do botão
+    const rect = btnSimuladorDados.getBoundingClientRect();
+    menuSimuladorDados.style.position = 'absolute';
+    menuSimuladorDados.style.top = rect.bottom + window.scrollY + 'px';
+    menuSimuladorDados.style.left = rect.left + window.scrollX + 'px';
+  } else {
+    menuSimuladorDados.style.display = 'none';
+  }
+});
+
+// Fecha o menu se clicar fora
+document.addEventListener('click', (e) => {
+  if (!btnSimuladorDados.contains(e.target) && !menuSimuladorDados.contains(e.target)) {
+    menuSimuladorDados.style.display = 'none';
+  }
+});
+
+// Função para rolar dado
+function rolarDado(lados) {
+  return Math.floor(Math.random() * lados) + 1;
+}
+
+// Função para mostrar o modal com o resultado do dado
+function mostrarResultadoDado(valor) {
+  const modal = document.getElementById('modalDado');
+  const resultadoTexto = document.getElementById('resultadoDado');
+  const btnFechar = document.getElementById('fecharModal');
+  resultadoTexto.textContent = `Resultado do D100: ${valor}`;
+  modal.style.display = 'block';
+  // Fecha o modal ao clicar no X
+  btnFechar.onclick = () => {
+    modal.style.display = 'none';
+  };
+  // Fecha o modal ao clicar fora do conteúdo
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
+
+// Adiciona evento para os botões do menu
+menuSimuladorDados.querySelectorAll('button').forEach(botao => {
+  botao.addEventListener('click', () => {
+    const lados = parseInt(botao.dataset.lados);
+    const resultado = rolarDado(lados);
+    alert(`Você rolou um D${lados} e o resultado foi: ${resultado}`);
+    menuSimuladorDados.style.display = 'none';
+  });
+});
+
 
 // Atualiza o destaque visual da ficha selecionada na lista
 function atualizarDestaqueLista() {
@@ -227,6 +286,8 @@ btnNovaFicha.addEventListener('click', (e) => {
   e.preventDefault();
   novaFicha();
 });
+
+
 
 onAuthStateChanged(auth, async (user) => {
      if (!user) {

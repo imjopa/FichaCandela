@@ -61,7 +61,11 @@ function gerarMarcasCategoria(categoriaDiv, quantidade) {
   const lista = categoriaDiv.querySelector('.marcas-lista');
   if (!lista) return;
 
+  const checkboxesAtuais = Array.from(lista.children);
+  const atualCount = checkboxesAtuais.length;
   lista.innerHTML = ''; // limpa os checkboxes atuais
+
+  
 
   for (let i = 0; i < quantidade; i++) {
     const li = document.createElement('li');

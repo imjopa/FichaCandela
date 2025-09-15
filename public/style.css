@@ -211,6 +211,42 @@ body {
   background-color: #ffbf00;
   color: #000;
   border-color: #000;
+  
+}
+
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@keyframes aparecerMarca {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Animação para o checkbox desaparecer */
+@keyframes desaparecerMarca {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+/* Aplica a animação quando o checkbox é inserido */
+.marcas-lista li {
+  display: inline-block;
+  animation: aparecerMarca 0.3s ease forwards;
 }
 
 /* Estilo para a lista de marcas (checkboxes) */

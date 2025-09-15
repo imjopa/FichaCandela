@@ -52,6 +52,14 @@ function preencherFormulario(dados) {
   }
 }
 
+// Atualiza o destaque visual da ficha selecionada na lista
+function atualizarDestaqueLista() {
+  const itens = listaFichas.querySelectorAll('li');
+  itens.forEach(li => {
+    li.classList.toggle('selecionada', li.dataset.id === fichaSelecionadaId);
+  });
+}
+
 // Lista fichas do usuário na interface
 async function listarFichas() {
   listaFichas.innerHTML = '';
@@ -101,15 +109,15 @@ async function listarFichas() {
 
 // Carrega ficha pelo ID
 async function carregarFicha(fichaId) {
-  if (!currentUser) return;
+  if (!currentUser ) return;
 
-  const fichaRef = doc(db, 'usuarios', currentUser.uid, 'fichas', fichaId);
+  const fichaRef = doc(db, 'usuarios', currentUser .uid, 'fichas', fichaId);
   const fichaSnap = await getDoc(fichaRef);
 
   if (fichaSnap.exists()) {
     fichaSelecionadaId = fichaId;
     preencherFormulario(fichaSnap.data());
-    listarFichas(); // Atualiza destaque
+    atualizarDestaqueLista(); // Atualiza só o destaque, sem recriar lista
   } else {
     alert('Ficha não encontrada.');
   }

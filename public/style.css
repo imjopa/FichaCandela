@@ -109,7 +109,7 @@ body {
   -moz-appearance: none;
   appearance: none;
   border-radius: 50%; /* Transforma em círculo */
-  width: 12px;
+  width: 15px;
   height: 18px;
   border: 2px solid #000000;
   cursor: pointer;
@@ -139,7 +139,7 @@ body {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.atributo input[type="checkbox"] :checked {
+.atributo input[type="checkbox"]:checked {
   background-color: #000; /* Preenchido de preto */
   border-color: #000; /* Borda preta */
 }

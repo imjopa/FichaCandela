@@ -131,6 +131,18 @@ document.addEventListener('click', (e) => {
   }
 });
 
+const cicatrizCheckboxes = document.querySelectorAll('.section.cicatrizes input[type="checkbox"]');
+cicatrizCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', () => {
+    const checkedCount = Array.from(cicatrizCheckboxes).filter(cb => cb.checked).length;
+    if (checkedCount > 3) {
+      checkbox.checked = false;
+      alert('Você pode marcar no máximo 3 cicatrizes.');
+    }
+  });
+});
+
+
 // Função para rolar dado
 function rolarDado(lados) {
   return Math.floor(Math.random() * lados) + 1;

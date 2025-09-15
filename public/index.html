@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ficha RPG - Candela Obscura</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fichas-manager.css" />
   <script type="module" src="./script.js"></script>
 
   <script type="module">
@@ -44,6 +45,14 @@
     <header class="ficha-header">
       <div class="logo">CANDELA OBSCURA</div>
       <button id="logoutBtn" style="align-self: flex-end; margin-bottom: 10px; cursor: pointer;">Logout</button>
+      <section id="fichasManager" class="fichas-manager">
+        <h2>Minhas Fichas</h2>
+        <ul id="listaFichas" class="lista-fichas">
+          <!-- Lista de fichas será preenchida dinamicamente -->
+        </ul>
+        <button id="btnNovaFicha" class="btn-nova-ficha">+ Nova Ficha</button>
+      </section>
+
       <form id="fichaForm">
         <div class="dados-gerais">
           <label>Nome: <input type="text" name="nome" /></label>
@@ -207,7 +216,7 @@
       </form>
     </header>
   </main>
-  
+
 </body>
 
 </html>

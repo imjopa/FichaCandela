@@ -174,12 +174,13 @@ btnNovaFicha.addEventListener('click', (e) => {
 });
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = 'login.html';
-    return;
-  }
-  currentUser = user;
-  fichaSelecionadaId = null;
-  novaFicha();
-  await listarFichas();
-});
+     if (!user) {
+       window.location.href = 'login.html';
+       return;
+     }
+     currentUser  = user;
+     fichaSelecionadaId = null;
+     novaFicha();
+     // await listarFichas();  // Remover esta linha
+   });
+   

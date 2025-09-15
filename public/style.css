@@ -22,9 +22,9 @@ body {
 
 .header-buttons {
   display: flex;
-  justify-content: space-between; /* coloca os botões nas extremidades */
+  gap: 10px;
+  justify-content: flex-end;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .btn-simulador {
@@ -41,7 +41,8 @@ body {
 }
 
 .btn-simulador:hover {
-  background-color: #222;
+  background-color: #ffffff;
+  color: #000;
 }
 
 .menu-simulador {

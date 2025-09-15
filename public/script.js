@@ -137,17 +137,18 @@ function rolarDado(lados) {
 }
 
 // Função para mostrar o modal com o resultado do dado
-function mostrarResultadoDado(valor) {
+function mostrarResultadoDado(valor, ladoDado) {
   const modal = document.getElementById('modalDado');
   const resultadoTexto = document.getElementById('resultadoDado');
   const btnFechar = document.getElementById('fecharModal');
-  resultadoTexto.textContent = `Resultado do D100: ${valor}`;
+
+  resultadoTexto.textContent = `O valor do seu dado D${ladoDado} foi: ${valor}`;
   modal.style.display = 'block';
-  // Fecha o modal ao clicar no X
+
   btnFechar.onclick = () => {
     modal.style.display = 'none';
   };
-  // Fecha o modal ao clicar fora do conteúdo
+
   window.onclick = (event) => {
     if (event.target === modal) {
       modal.style.display = 'none';
@@ -155,15 +156,18 @@ function mostrarResultadoDado(valor) {
   };
 }
 
+
 // Adiciona evento para os botões do menu
 menuSimuladorDados.querySelectorAll('button').forEach(botao => {
   botao.addEventListener('click', () => {
     const lados = parseInt(botao.dataset.lados);
     const resultado = rolarDado(lados);
-    alert(`Você rolou um D${lados} e o resultado foi: ${resultado}`);
+    mostrarResultadoDado(resultado, lados);
     menuSimuladorDados.style.display = 'none';
   });
 });
+
+
 
 
 // Atualiza o destaque visual da ficha selecionada na lista

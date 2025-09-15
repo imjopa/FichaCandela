@@ -38,7 +38,6 @@ body {
   border-radius: 4px;
   margin-left: 10px;
   transition: background-color 0.3s ease;
-  align-self: flex-end; /* Para alinhar verticalmente com o logout */
 }
 
 .btn-simulador:hover {
@@ -77,8 +76,6 @@ body {
 
 
 .btn-logout {
-  align-self: flex-end;
-  margin-bottom: 10px;
   cursor: pointer;
   padding: 10px 20px;
   font-weight: 900;

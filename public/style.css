@@ -151,9 +151,9 @@ body {
 }
 
 .atributo h2 {
-  font-family: "Cormorant Unicase", serif;
+  font-family: "Jim Nightshade", cursive;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   /* mantém tamanho atual */
   margin: 0;
   /* remove margem para alinhar melhor */
@@ -277,7 +277,7 @@ body {
 
 .papel-especialidade h3 {
   font-weight: 700;
-  font-family: "Cormorant Unicase", serif;
+  font-family: "Jim Nightshade", cursive;
   font-size: 1.5rem;
 }
 
@@ -301,7 +301,7 @@ body {
   border: 1px solid black;
   /* width: 300px; */
   padding: 10px;
-  font-family: "Cormorant Unicase", serif;
+  font-family: "Jim Nightshade", cursive;
   font-size: 12px;
   background-color: #0a0a0a;
 }
@@ -492,8 +492,8 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 10px;
   background-color: #0a0a0a;
   border: 1px solid black;
-  font-family: "Cormorant Unicase", serif;
-  font-size: 12px;
+  font-family: "Jim Nightshade", cursive;
+  font-size: 20px;
   max-height: 400px;
   overflow-y: auto;
   color: white;
@@ -514,8 +514,8 @@ input[type=number]::-webkit-outer-spin-button {
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
-  font-family: "Cormorant Unicase", serif;
-  font-size: 1rem;
+  font-family: "Jim Nightshade", cursive;
+  font-size: 1.3rem;
   color: white;
 }
 
@@ -585,7 +585,7 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #0a0a0a;
   /* Para marcas, ajuste para as outras se quiser */
   border: 1px solid black;
-  font-family: "Cormorant Unicase", serif;
+  font-family: "Jim Nightshade", cursive;
   font-size: 12px;
   max-height: 300px;
   /* Limita altura para scroll */
@@ -620,6 +620,36 @@ input[type=number]::-webkit-outer-spin-button {
   border: 1px solid #000;
   color: #000;
 }
+
+/* Container para Relacionamentos e Equipamento lado a lado */
+.relacionamentos-e-equipamento-container {
+  display: flex;
+  gap: 20px; /* Espaço entre as duas sections */
+  margin-top: 20px; /* Espaço acima do container */
+}
+
+/* Cada subsection ocupa metade da largura */
+.subsection.relacionamentos,
+.subsection.equipamento {
+  flex: 1; /* Ocupa igualmente o espaço disponível */
+  box-sizing: border-box;
+  padding: 15px;
+  border: 2px solid #000;
+  background-color: #f5f5f5;
+  font-family: "Jim Nightshade", cursive;
+  font-size: 1.1rem;
+  max-height: 400px; /* Ajuste conforme desejar */
+  overflow-y: auto; /* Scroll vertical se o conteúdo ultrapassar a altura */
+}
+
+/* Títulos das subsections */
+.subsection h3 {
+  font-weight: 700;
+  font-family: "Jim Nightshade", cursive;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
 
 /* Ajusta inputs para ocupar toda largura dentro das listas */
 .lista-relacionamento input[type="text"],

@@ -198,39 +198,58 @@
         </section>
 
         <!-- Marcas, Relacionamentos, Equipamento e Notas -->
-        <div class="section marcas">
+        <div class="marcas-cicatrizes-container">
+          <div class="section marcas">
+            <div class="header-black">
+              <h2>MARCAS</h2>
+            </div>
+            <div class="marcas-conteudo">
+              <!-- Categorias de marcas aqui -->
+              <div class="categoria" data-categoria="corpo">
+                <h3>CORPO</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+              <div class="categoria" data-categoria="mente">
+                <h3>MENTE</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+              <div class="categoria" data-categoria="sangria">
+                <h3>SANGRIA</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+            </div>
+          </div>
           <div class="header-black">
-            <h2>MARCAS</h2>
+            <h2>CICATRIZES</h2>
           </div>
-          <div class="marcas-conteudo">
-            <div class="categoria" data-categoria="corpo">
-              <h3>CORPO</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
+          <div class="cicatrizes-conteudo">
+            <p>Marque até 3 cicatrizes:</p>
+            <div class="linha-cicatriz">
+              <input type="checkbox" name="cicatriz_1" id="cicatriz_1" />
+              <label for="cicatriz_1">Cicatriz 1</label>
             </div>
-
-            <div class="categoria" data-categoria="mente">
-              <h3>MENTE</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
+            <div class="linha-cicatriz">
+              <input type="checkbox" name="cicatriz_2" id="cicatriz_2" />
+              <label for="cicatriz_2">Cicatriz 2</label>
             </div>
-
-            <div class="categoria" data-categoria="sangria">
-              <h3>SANGRIA</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="3" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
+            <div class="linha-cicatriz">
+              <input type="checkbox" name="cicatriz_3" id="cicatriz_3" />
+              <label for="cicatriz_3">Cicatriz 3</label>
             </div>
           </div>
-
+        </div>
         </div>
 
         <div class="subsection relacionamentos">

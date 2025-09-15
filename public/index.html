@@ -143,71 +143,77 @@
         </section>
 
         <!-- Marcas, Relacionamentos, Equipamento e Notas -->
-        <div class="section marcas">
-          <div class="header-black">
-            <h2>MARCAS</h2>
+          <div class="section marcas">
+            <div class="header-black">
+              <h2>MARCAS</h2>
+            </div>
+            <div class="marcas-conteudo">
+              <div class="categoria" data-categoria="corpo">
+                <h3>CORPO</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+
+              <div class="categoria" data-categoria="mente">
+                <h3>MENTE</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+
+              <div class="categoria" data-categoria="sangria">
+                <h3>SANGRIA</h3>
+                <label class="max-marcas-control">
+                  Máximo de marcas:
+                  <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+                </label>
+                <ul class="marcas-lista"></ul>
+              </div>
+            </div>
+
           </div>
-          <div class="marcas-conteudo">
-            <div class="categoria" data-categoria="corpo">
-              <h3>CORPO</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
-            </div>
 
-            <div class="categoria" data-categoria="mente">
-              <h3>MENTE</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
-            </div>
-
-            <div class="categoria" data-categoria="sangria">
-              <h3>SANGRIA</h3>
-              <label class="max-marcas-control">
-                Máximo de marcas:
-                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
-              </label>
-              <ul class="marcas-lista"></ul>
-            </div>
+          <div class="subsection relacionamentos">
+            <h3>RELACIONAMENTOS</h3>
+            <ul class="lista-relacionamento">
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+              <li><input type="text"></li>
+            </ul>
           </div>
 
-        </div>
+          <div class="subsection equipamento">
+            <h3>EQUIPAMENTO</h3>
+            <p>Durante cada atribuição, escolha até três.</p>
+            <ul class="lista-equipamento">
+              <li><input type="checkbox"> <input type="text"></li>
+              <li><input type="checkbox"> <input type="text"></li>
+              <li><input type="checkbox"> <input type="text"></li>
+              <li><input type="checkbox"> <input type="text"></li>
+              <li><input type="checkbox"> <input type="text"></li>
+              <li><input type="checkbox"> <input type="text"></li>
+            </ul>
+          </div>
 
-        <div class="subsection relacionamentos">
-          <h3>RELACIONAMENTOS</h3>
-          <ul class="lista-relacionamento">
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-          </ul>
-        </div>
-
-        <div class="subsection equipamento">
-          <h3>EQUIPAMENTO</h3>
-          <p>Durante cada atribuição, escolha até três.</p>
-          <ul class="lista-equipamento">
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-            <li><input type="checkbox"> <input type="text"></li>
-          </ul>
-        </div>
-
-        <div class="subsection notas">
-          <h3>NOTAS</h3>
-          <textarea rows="5" cols="40" placeholder="Escreva suas anotações aqui..."></textarea>
-        </div>
-
+          <div class="subsection notas">
+            <h3>NOTAS</h3>
+            <textarea rows="5" cols="40" placeholder="Escreva suas anotações aqui..."></textarea>
+          </div>
         <button type="submit">Salvar Ficha</button>
       </form>
     </header>

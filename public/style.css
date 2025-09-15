@@ -123,12 +123,28 @@ body {
 }
 
 .atributo input[type=checkbox] {
+    -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Define tamanho e formato circular */
   width: 20px;
-  margin-left: 10px;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 7px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  /* Fundo branco inicialmente */
+  background-color: #fff;
+  /* Cursor de ponteiro para indicar clicável */
+  cursor: pointer;
+  /* Transição suave para a mudança de cor */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
+.atributo input[type="checkbox"] :checked {
+  background-color: #000; /* Preenchido de preto */
+  border-color: #000; /* Borda preta */
+}
+
+
 
 .small {
   font-size: 0.8rem;
@@ -338,26 +354,97 @@ input[type=number] {
   margin-right: 5px;
 }
 
-.lista-relacionamento input[type="text"] {
-    width: 500px;
+/* Container flexível para as três seções lado a lado */
+.section.marcas,
+.subsection.relacionamentos,
+.subsection.equipamento {
+  display: inline-block; /* Para respeitar largura e alinhamento */
+  vertical-align: top;   /* Alinha pelo topo */
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #0a0a0a; /* Para marcas, ajuste para as outras se quiser */
+  border: 1px solid black;
+  font-family: "Cormorant Unicase", serif;
+  font-size: 12px;
+  max-height: 300px; /* Limita altura para scroll */
+  overflow-y: auto;
 }
 
+/* Larguras proporcionais para as seções */
+.section.marcas {
+   max-height: 400px; /* ou a altura que desejar */
+  min-height: 400px; /* força altura mínima igual */
+  width: 30%;
+  margin-right: 1.5%;
+    max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.subsection.relacionamentos {
+    max-height: 400px; /* ou a altura que desejar */
+  min-height: 400px; /* força altura mínima igual */
+  padding: 15px;
+  overflow-y: auto;
+  width: 33%;
+  margin-right: 1.5%;
+  background-color: #f5f5f5; /* Ajuste para diferenciar visualmente */
+  border: 1px solid #000;
+  color: #000;
+}
+
+.subsection.equipamento {
+      max-height: 400px; /* ou a altura que desejar */
+  min-height: 400px; /* força altura mínima igual */
+  padding: 15px;
+  overflow-y: auto;
+  width: 33%;
+  background-color: #f5f5f5; /* Ajuste para diferenciar visualmente */
+  border: 1px solid #000;
+  color: #000;
+}
+
+/* Ajusta inputs para ocupar toda largura dentro das listas */
+.lista-relacionamento input[type="text"],
 .lista-equipamento input[type="text"] {
-    width: 500px;
+   width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
 }
 
+/* Limita altura das listas para scroll */
+.lista-relacionamento,
+.lista-equipamento {
+  
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 5px; /* Para evitar sobreposição da scrollbar */
+}
+
+/* Seção notas ocupa toda a largura abaixo */
+.subsection.notas {
+  clear: both; /* Garante que fique abaixo das seções lado a lado */
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  font-family: "Cormorant Unicase", serif;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+}
+
+/* Ajusta textarea para ocupar toda a largura */
 .subsection.notas textarea {
-  width: 570px; /* Altere para o valor que você precisa, como 600px ou 100% */
+  min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-family: "Cormorant Unicase", serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  border: 2px solid #000;
+  resize: vertical;
 }
 
-.relacionamentos label,
-.equipamento label,
-.notas label {
-  display: block;
-  border-bottom: 1px solid black;
-  margin: 6px 0;
-  height: 15px;
-}
 
 button[type="submit"] {
   margin-top: 30px;

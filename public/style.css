@@ -20,17 +20,25 @@ body {
   gap: 15px;
 }
 
+.header-buttons {
+  display: flex;
+  justify-content: space-between; /* coloca os botões nas extremidades */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .btn-simulador {
   cursor: pointer;
-  padding: 10px 20px;
-  font-weight: 700;
-  font-size: 1.1rem;
+  padding: 10px 20px; /* Mesmo padding do botão logout */
+  font-weight: 900;   /* Igual ao logout */
+  font-size: 1.1rem;  /* Igual ao logout */
   background-color: #000;
   color: #fff;
   border: none;
   border-radius: 4px;
   margin-left: 10px;
   transition: background-color 0.3s ease;
+  align-self: flex-end; /* Para alinhar verticalmente com o logout */
 }
 
 .btn-simulador:hover {
@@ -276,13 +284,15 @@ body {
   
 }
 
+input[type=number] {
+-moz-appearance: textfield;
+}
+
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none;
   margin: 0; 
 }
-input[type=number] {
-  -moz-appearance: textfield;
-}
+
 
 @keyframes aparecerMarca {
   from {

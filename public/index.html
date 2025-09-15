@@ -49,19 +49,21 @@
     <!-- Cabeçalho -->
     <header class="ficha-header">
       <div class="logo">CANDELA OBSCURA</div>
-      <!-- Botão Logout -->
-      <button id="logoutBtn" class="btn-logout">Logout</button>
-      <!-- Simulador de Dados -->
-      <button id="btnSimuladorDados" class="btn-simulador">Simulador de Dados ▼</button>
-      <div id="menuSimuladorDados" class="menu-simulador" style="display:none;">
-        <button data-lados="4">D4</button>
-        <button data-lados="6">D6</button>
-        <button data-lados="8">D8</button>
-        <button data-lados="12">D12</button>
-        <button data-lados="20">D20</button>
-        <button data-lados="100">D100</button>
+      <div class="header-buttons">
+        <!-- Simulador de Dados -->
+        <button id="btnSimuladorDados" class="btn-simulador">Simulador de Dados ▼</button>
+        <div id="menuSimuladorDados" class="menu-simulador" style="display:none;">
+          <button data-lados="4">D4</button>
+          <button data-lados="6">D6</button>
+          <button data-lados="8">D8</button>
+          <button data-lados="12">D12</button>
+          <button data-lados="20">D20</button>
+          <button data-lados="100">D100</button>
+        </div>
+        <!-- Botão Logout -->
+        <button id="logoutBtn" class="btn-logout">Logout</button>
       </div>
-
+      
       <section id="fichasManager" class="fichas-manager">
         <h2>Minhas Fichas</h2>
         <ul id="listaFichas" class="lista-fichas">
@@ -231,15 +233,15 @@
       </form>
     </header>
   </main>
-<!-- Modal para mostrar resultado do dado -->
-<div id="modalDado" class="modal-dado">
-  <div class="modal-content">
-    <span id="fecharModal" class="fechar">&times;</span>
-    <p id="resultadoDado" class="resultado-dado-text"></p>
+  <!-- Modal para mostrar resultado do dado -->
+  <div id="modalDado" class="modal-dado">
+    <div class="modal-content">
+      <span id="fecharModal" class="fechar">&times;</span>
+      <p id="resultadoDado" class="resultado-dado-text"></p>
+    </div>
   </div>
-</div>
 
-  
+
 </body>
 
 </html>

@@ -25,6 +25,9 @@ const btnNovaFicha = document.getElementById('btnNovaFicha');
 let currentUser = null;
 let fichaSelecionadaId = null;
 
+
+
+
 // Limpa o formulário
 function limparFormulario() {
   for (let element of form.elements) {
@@ -51,6 +54,54 @@ function preencherFormulario(dados) {
     }
   }
 }
+
+
+// Função para gerar checkboxes para uma categoria
+function gerarMarcasCategoria(categoriaDiv, quantidade) {
+  const lista = categoriaDiv.querySelector('.marcas-lista');
+  if (!lista) return;
+
+  lista.innerHTML = ''; // limpa os checkboxes atuais
+
+  for (let i = 0; i < quantidade; i++) {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = `${categoriaDiv.dataset.categoria}_marca_${i + 1}`;
+    checkbox.id = `${categoriaDiv.dataset.categoria}_marca_${i + 1}`;
+    li.appendChild(checkbox);
+    lista.appendChild(li);
+  }
+}
+
+// Inicializa todas as categorias com o valor padrão dos inputs
+function inicializarMarcas() {
+  const categorias = document.querySelectorAll('.categoria');
+  categorias.forEach(categoriaDiv => {
+    const inputMax = categoriaDiv.querySelector('.max-marcas-input');
+    if (!inputMax) return;
+
+    let val = parseInt(inputMax.value);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > 20) val = 20;
+
+    gerarMarcasCategoria(categoriaDiv, val);
+
+    // Adiciona listener para atualizar a quantidade ao mudar o input
+    inputMax.addEventListener('input', () => {
+      let novoVal = parseInt(inputMax.value);
+      if (isNaN(novoVal) || novoVal < 1) novoVal = 1;
+      if (novoVal > 20) novoVal = 20;
+      inputMax.value = novoVal; // corrige valor no input se necessário
+      gerarMarcasCategoria(categoriaDiv, novoVal);
+    });
+  });
+}
+
+// Chama a inicialização ao carregar o script
+inicializarMarcas();
+
+
 
 // Atualiza o destaque visual da ficha selecionada na lista
 function atualizarDestaqueLista() {

@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="fichas-manager.css" />
   <script type="module" src="./script.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Jim+Nightshade&display=swap');
+  </style>
+
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
@@ -44,7 +48,7 @@
     <!-- Cabeçalho -->
     <header class="ficha-header">
       <div class="logo">CANDELA OBSCURA</div>
-      <button id="logoutBtn" style="align-self: flex-end; margin-bottom: 10px; cursor: pointer;">Logout</button>
+      <button id="logoutBtn" class="btn-logout">Logout</button>
       <section id="fichasManager" class="fichas-manager">
         <h2>Minhas Fichas</h2>
         <ul id="listaFichas" class="lista-fichas">
@@ -70,19 +74,19 @@
             <label><input type="checkbox" class="mover-checkbox"> Mover <small>(Correr, Desviar, Guiar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="mover" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Atacar <small>(Socar, Quebrar, Derrubar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="atacar" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Controlar <small>(Dirigir, Atirar, Finesse)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="controlar" min="0" max="6" /> -->
             </label>
           </div>
@@ -90,19 +94,19 @@
             <h2>Astúcia</h2>
             <label><input type="checkbox"> Investigar <small>(Pesquisar, Rastrear, Localizar)</small></label>
             <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-              type="checkbox"> <input type="checkbox">
+              type="checkbox"> <input type="checkbox"> <input type="checkbox">
             <!-- <input type="number" name="investigar" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Ler <small>(Linguagem Corporal, Identificar Mentiras)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="ler" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Esconder <small>(Esgueirar-se, Disfarçar, Enganar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="esconder" min="0" max="6" /> -->
             </label>
           </div>
@@ -111,19 +115,19 @@
             <label><input type="checkbox"> Persuasão <small>(Convencer, Liderar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="persuasao" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Focar <small>(Inspecionar, Analisar, Lembrar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="focar" min="0" max="6" /> -->
             </label>
             <label><input type="checkbox"> Sentir <small>(Ocultismo, Canalizar, Revelar)</small>
               <br>
               <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
-                type="checkbox"> <input type="checkbox">
+                type="checkbox"> <input type="checkbox"> <input type="checkbox">
               <!-- <input type="number" name="sentir" min="0" max="6" /> -->
             </label>
           </div>
@@ -144,42 +148,34 @@
             <h2>MARCAS</h2>
           </div>
           <div class="marcas-conteudo">
-            <div class="categoria">
+            <div class="categoria" data-categoria="corpo">
               <h3>CORPO</h3>
-              <ul>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-              </ul>
+              <label class="max-marcas-control">
+                Máximo de marcas:
+                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+              </label>
+              <ul class="marcas-lista"></ul>
             </div>
 
-            <div class="categoria">
+            <div class="categoria" data-categoria="mente">
               <h3>MENTE</h3>
-              <ul>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-              </ul>
+              <label class="max-marcas-control">
+                Máximo de marcas:
+                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+              </label>
+              <ul class="marcas-lista"></ul>
             </div>
 
-            <div class="categoria">
+            <div class="categoria" data-categoria="sangria">
               <h3>SANGRIA</h3>
-              <ul>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-                <li><input type="checkbox"></li>
-              </ul>
+              <label class="max-marcas-control">
+                Máximo de marcas:
+                <input type="number" min="1" max="20" value="6" class="max-marcas-input" />
+              </label>
+              <ul class="marcas-lista"></ul>
             </div>
           </div>
+
         </div>
 
         <div class="subsection relacionamentos">

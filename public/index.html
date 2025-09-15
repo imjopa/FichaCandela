@@ -23,6 +23,12 @@
       }
     });
 
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+
     const db = getFirestore(app);
     // Exporta para usar em outros scripts
     window.firebaseApp = app;
@@ -201,13 +207,7 @@
       </form>
     </header>
   </main>
-  <script type="module">
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    });
-  </script>
+  
 </body>
 
 </html>

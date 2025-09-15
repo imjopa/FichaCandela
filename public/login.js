@@ -18,14 +18,12 @@ loginForm.addEventListener('submit', async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    // Login ok, redireciona para ficha
     window.location.href = 'index.html';
   } catch (error) {
     errorMsg.textContent = 'Erro no login: ' + error.message;
   }
 });
 
-// Link para criar conta nova
 signupLink.addEventListener('click', async (e) => {
   e.preventDefault();
   errorMsg.textContent = '';

@@ -6,7 +6,7 @@ const firebaseConfig = {
 
     projectId: "fichacandela-65ce2",
 
-    storageBucket: "fichacandela-65ce2.firebasestorage.app",
+    storageBucket: "fichacandela-65ce2.appspot.com",
 
     messagingSenderId: "648824634131",
 

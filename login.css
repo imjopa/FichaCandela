@@ -1,0 +1,76 @@
+body {
+  font-family: 'Georgia', serif;
+  background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  border: 2px solid #000;
+  padding: 30px 40px;
+  max-width: 350px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  margin-bottom: 25px;
+  letter-spacing: 0.15em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 8px;
+  font-size: 1rem;
+  border: 2px solid #000;
+  outline: none;
+  font-family: 'Georgia', serif;
+}
+
+button {
+  padding: 10px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #222;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  min-height: 1.2em;
+}
+
+a {
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}

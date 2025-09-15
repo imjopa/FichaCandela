@@ -7,6 +7,29 @@
   <title>Ficha RPG - Candela Obscura</title>
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="./script.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { firebaseConfig } from "./firebase-config.js";
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        // Se não estiver logado, redireciona para login
+        window.location.href = 'login.html';
+      }
+    });
+
+    const db = getFirestore(app);
+    // Exporta para usar em outros scripts
+    window.firebaseApp = app;
+    window.firebaseAuth = auth;
+    window.firebaseDB = db;
+  </script>
+
 </head>
 
 <body>
@@ -14,6 +37,7 @@
     <!-- Cabeçalho -->
     <header class="ficha-header">
       <div class="logo">CANDELA OBSCURA</div>
+      <button id="logoutBtn" style="align-self: flex-end; margin-bottom: 10px; cursor: pointer;">Logout</button>
       <form id="fichaForm">
         <div class="dados-gerais">
           <label>Nome: <input type="text" name="nome" /></label>
@@ -177,6 +201,13 @@
       </form>
     </header>
   </main>
+  <script type="module">
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+  </script>
 </body>
 
 </html>

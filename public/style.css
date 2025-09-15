@@ -1,0 +1,262 @@
+/* styles.css */
+body {
+  font-family: 'Georgia', serif;
+  background: #fff;
+  color: #000;
+  padding: 20px;
+}
+
+.ficha {
+  max-width: 1200px;
+  margin: auto;
+  border: 2px solid #000;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.ficha-header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 2.5rem;
+  letter-spacing: 0.15em;
+  border-bottom: 4px solid #000;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.dados-gerais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.dados-gerais label {
+  flex: 1 1 30%;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.dados-gerais input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-weight: normal;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+  outline: none;
+}
+
+.atributos {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.atributo {
+  flex: 1;
+  border: 2px solid #000;
+  padding: 10px;
+  font-weight: 700;
+  background: #f5f5f5;
+}
+
+.atributo h2 {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  font-family: 'Times New Roman', serif;
+}
+
+.atributo label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+/* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
+.atributo label input:first-of-type {
+  /* Altere o formato com CSS */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%; /* Transforma em círculo */
+  width: 12px;
+  height: 18px;
+  border: 2px solid #000000;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Estiliza quando o checkbox é marcado */
+.atributo label input:first-of-type:checked {
+  background-color: #ffbf00;
+  border-color: #000000;
+}
+
+.atributo input[type=checkbox] {
+  width: 20px;
+  margin-left: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 7px;
+}
+
+.small {
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.papel-especialidade {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.papel-especialidade h3 {
+  font-weight: 800;
+  font-family: 'Times New Roman', serif;
+  margin-bottom: 8px;
+}
+
+.papel-especialidade textarea {
+  width: 100%;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  padding: 8px;
+  border: 2px solid #000;
+  resize: vertical;
+}
+
+.papel-especialidade {
+  flex: 1 1 50%;
+  flex-direction: column;
+  display: flex;
+}
+
+.section.marcas {
+  border: 1px solid black;
+  padding: 10px;
+  font-family: "Times New Roman", serif;
+  font-size: 12px;
+  background-color: #0a0a0a;
+}
+
+.header-black {
+  background-color: #000; /* Cor de fundo preta */
+  color: #fff; /* Cor do texto branca */
+  padding: 10px 20px; /* Espaçamento interno */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 20px; /* Adiciona um espaço abaixo do cabeçalho */
+}
+
+.marcas-conteudo {
+  background-color: #000;
+  display: flex; /* Transforma o div em um contêiner flexível */
+  justify-content: space-around; /* Distribui o espaço entre os itens */
+  align-items: flex-start; /* Alinha os itens do topo para baixo */
+}
+
+/* Opcional: Adicionar um espaçamento dentro de cada categoria */
+.categoria {
+  padding: 0 15px; /* Adiciona um espaço nas laterais para melhor visualização */
+}
+
+.header-black h2 {
+  font-size: 1.5rem; /* Tamanho da fonte do título */
+  margin: 0; /* Remove a margem padrão do <h2> para ficar alinhado */
+}
+
+.categoria {
+  margin-bottom: 20px; /* Aumenta o espaço entre as categorias */
+}
+
+.categoria h3 {
+  font-size: 1.2rem;
+  color: #ffffff; /* Uma cor mais escura para o título da categoria */
+  margin-bottom: 10px; /* Espaço abaixo do título da categoria */
+}
+
+.categoria ul {
+  list-style: none; /* Remove os marcadores padrão da lista (bolinhas ou números) */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Alinha os checkboxes horizontalmente */
+  gap: 10px; /* Adiciona um espaço entre eles */
+}
+
+/* .categoria li {
+  /* Pode ser usado para espaçamento individual se precisar */
+/* }  */
+
+.categoria input[type="checkbox"] {
+  /* Aqui você pode colocar os estilos do checkbox */
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Deixa as bordas arredondadas */
+}
+
+.categoria input[type="checkbox"]:checked {
+  background-color: #555; /* Muda a cor de fundo quando marcado */
+}
+
+.cicatrizes p {
+  font-size: 10px;
+  font-style: italic;
+}
+
+.linha-cicatriz {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.linha-cicatriz input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.lista-relacionamento input[type="text"] {
+    width: 500px;
+}
+
+.lista-equipamento input[type="text"] {
+    width: 500px;
+}
+
+.subsection.notas textarea {
+  width: 570px; /* Altere para o valor que você precisa, como 600px ou 100% */
+}
+
+.relacionamentos label,
+.equipamento label,
+.notas label {
+  display: block;
+  border-bottom: 1px solid black;
+  margin: 6px 0;
+  height: 15px;
+}
+
+button[type="submit"] {
+  margin-top: 30px;
+  padding: 10px 15px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+button[type="submit"]:hover {
+  background: #222;
+}

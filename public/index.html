@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha RPG - Candela Obscura</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="./script.js"></script>
+</head>
+
+<body>
+  <main class="ficha">
+    <!-- Cabeçalho -->
+    <header class="ficha-header">
+      <div class="logo">CANDELA OBSCURA</div>
+      <form id="fichaForm">
+        <div class="dados-gerais">
+          <label>Nome: <input type="text" name="nome" /></label>
+          <label>Papel: <input type="text" name="papel" /></label>
+          <label>Espec: <input type="text" name="espec" /></label>
+          <label>Círculo: <input type="text" name="circulo" /></label>
+          <label>Plano: <input type="text" name="plano" /></label>
+          <label>Religião: <input type="text" name="religiao" /></label>
+        </div>
+
+        <!-- Corpo, Astúcia, Intuição -->
+        <section class="atributos">
+          <div class="atributo" id="corpo">
+            <h2>Corpo</h2>
+            <label><input type="checkbox" class="mover-checkbox"> Mover <small>(Correr, Desviar, Guiar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="mover" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Atacar <small>(Socar, Quebrar, Derrubar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="atacar" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Controlar <small>(Dirigir, Atirar, Finesse)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="controlar" min="0" max="6" /> -->
+            </label>
+          </div>
+          <div class="atributo" id="astucia">
+            <h2>Astúcia</h2>
+            <label><input type="checkbox"> Investigar <small>(Pesquisar, Rastrear, Localizar)</small></label>
+            <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+              type="checkbox"> <input type="checkbox">
+            <!-- <input type="number" name="investigar" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Ler <small>(Linguagem Corporal, Identificar Mentiras)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="ler" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Esconder <small>(Esgueirar-se, Disfarçar, Enganar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="esconder" min="0" max="6" /> -->
+            </label>
+          </div>
+          <div class="atributo" id="intuicao">
+            <h2>Intuição</h2>
+            <label><input type="checkbox"> Persuasão <small>(Convencer, Liderar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="persuasao" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Focar <small>(Inspecionar, Analisar, Lembrar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="focar" min="0" max="6" /> -->
+            </label>
+            <label><input type="checkbox"> Sentir <small>(Ocultismo, Canalizar, Revelar)</small>
+              <br>
+              <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input
+                type="checkbox"> <input type="checkbox">
+              <!-- <input type="number" name="sentir" min="0" max="6" /> -->
+            </label>
+          </div>
+        </section>
+
+        <!-- Papel e Especialidade -->
+        <section class="papel-especialidade">
+          <h3>Habilidades do Papel</h3>
+          <textarea name="papelDescricao" rows="6"></textarea>
+
+          <h3>Habilidades da Especialidade</h3>
+          <textarea name="especialidade" rows="10"></textarea>
+        </section>
+
+        <!-- Marcas, Relacionamentos, Equipamento e Notas -->
+        <div class="section marcas">
+          <div class="header-black">
+            <h2>MARCAS</h2>
+          </div>
+          <div class="marcas-conteudo">
+            <div class="categoria">
+              <h3>CORPO</h3>
+              <ul>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+              </ul>
+            </div>
+
+            <div class="categoria">
+              <h3>MENTE</h3>
+              <ul>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+              </ul>
+            </div>
+
+            <div class="categoria">
+              <h3>SANGRIA</h3>
+              <ul>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+                <li><input type="checkbox"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection relacionamentos">
+          <h3>RELACIONAMENTOS</h3>
+          <ul class="lista-relacionamento">
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+          </ul>
+        </div>
+
+        <div class="subsection equipamento">
+          <h3>EQUIPAMENTO</h3>
+          <p>Durante cada atribuição, escolha até três.</p>
+          <ul class="lista-equipamento">
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+            <li><input type="checkbox"> <input type="text"></li>
+          </ul>
+        </div>
+
+        <div class="subsection notas">
+          <h3>NOTAS</h3>
+          <textarea rows="5" cols="40" placeholder="Escreva suas anotações aqui..."></textarea>
+        </div>
+
+        <button type="submit">Salvar Ficha</button>
+      </form>
+    </header>
+  </main>
+</body>
+
+</html>

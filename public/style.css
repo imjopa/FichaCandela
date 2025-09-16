@@ -684,6 +684,11 @@ input[type=number]::-webkit-outer-spin-button {
   /* Para evitar sobreposição da scrollbar */
 }
 
+.lista-relacionamento li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+
 .notas-e-circulo-container {
   display: flex;
   gap: 20px;

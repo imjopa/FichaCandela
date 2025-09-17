@@ -256,24 +256,78 @@ async function carregarFicha(id) {
       }
     }
 
-    // Preenche impulsos
-    ["corpo", "astucia", "intuicao"].forEach((atributo) => {
-      const checkboxes = document.querySelectorAll(
-        `#${atributo} .checkbox-impulso`
-      );
-      const maxInput = document.querySelector(
-        `#${atributo} .max-impulsos-input`
-      );
-      if (data[`${atributo}_impulsos_max`]) {
-        maxInput.value = data[`${atributo}_impulsos_max`];
-      }
-      if (data[`${atributo}_impulsos`]) {
-        data[`${atributo}_impulsos`].forEach((checked, idx) => {
-          if (checkboxes[idx]) checkboxes[idx].checked = checked;
+    // Atualiza os checkboxes de impulsos conforme o valor do input
+    // Atualiza os checkboxes de impulsos conforme o valor do input
+    function atualizarImpulsos() {
+      const maxImpulsosInputs = document.querySelectorAll('.max-impulsos-input');
+
+      maxImpulsosInputs.forEach(input => {
+        const atributo = input.dataset.atributo; // 'corpo', 'astucia', 'intuicao'
+        let maxImpulsos = parseInt(input.value, 10);
+
+        // Limita o valor do input entre 1 e 9
+        if (isNaN(maxImpulsos) || maxImpulsos < 1) maxImpulsos = 1;
+        if (maxImpulsos > 9) maxImpulsos = 9;
+        input.value = maxImpulsos;
+
+        const atributoDiv = document.getElementById(atributo);
+        if (!atributoDiv) return;
+
+        const checkboxes = atributoDiv.querySelectorAll('.checkbox-impulso');
+
+        checkboxes.forEach((checkbox, index) => {
+          if (index < maxImpulsos) {
+            checkbox.disabled = false;
+          } else {
+            checkbox.checked = false; // desmarca checkboxes extras
+            checkbox.disabled = true;  // desabilita checkboxes extras
+          }
         });
+      });
+    }
+
+    // Controla a marcação dos checkboxes para não ultrapassar o máximo permitido
+    function controlarCheckboxes(event) {
+      const checkbox = event.target;
+      if (!checkbox.classList.contains('checkbox-impulso')) return;
+
+      const atributoDiv = checkbox.closest('.atributo');
+      if (!atributoDiv) return;
+
+      const atributo = atributoDiv.id;
+      const maxImpulsosInput = document.querySelector(`.max-impulsos-input[data-atributo="${atributo}"]`);
+      if (!maxImpulsosInput) return;
+
+      const maxImpulsos = parseInt(maxImpulsosInput.value, 10);
+      const checkboxes = atributoDiv.querySelectorAll('.checkbox-impulso');
+
+      // Conta quantos checkboxes estão marcados
+      const marcados = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+      // Se ultrapassar o máximo, desmarca o checkbox que tentou marcar
+      if (marcados > maxImpulsos) {
+        checkbox.checked = false;
+        alert(`Você só pode marcar até ${maxImpulsos} impulsos para ${atributo}.`);
       }
+    }
+
+    // Liga o evento input para atualizar os checkboxes quando o valor mudar
+    document.querySelectorAll('.max-impulsos-input').forEach(input => {
+      input.addEventListener('input', () => {
+        atualizarImpulsos();
+      });
     });
-    atualizarImpulsos();
+
+    // Liga o evento change para controlar a marcação dos checkboxes
+    document.querySelectorAll('.checkbox-impulso').forEach(checkbox => {
+      checkbox.addEventListener('change', controlarCheckboxes);
+    });
+
+    // Inicializa o estado dos checkboxes ao carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+      atualizarImpulsos();I
+    });
+
 
     // Preenche marcas
     ["corpo", "mente", "sangria"].forEach((categoria) => {
@@ -376,15 +430,10 @@ async function carregarListaFichas() {
 
 // --- Inicialização ---
 window.addEventListener("load", () => {
-  atualizarImpulsos();
   renderizarMarcas();
   carregarListaFichas();
 });
 
-// Atualiza impulsos ao mudar input
-document.querySelectorAll(".max-impulsos-input").forEach((input) => {
-  input.addEventListener("input", atualizarImpulsos);
-});
 
 // Atualiza marcas ao mudar max-marcas-input (já tratado na renderizarMarcas)
 
@@ -398,7 +447,6 @@ fichaForm.addEventListener("submit", async (e) => {
 btnNovaFicha.addEventListener("click", () => {
   fichaAtualId = null;
   fichaForm.reset();
-  atualizarImpulsos();
   renderizarMarcas();
 });
 

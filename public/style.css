@@ -167,6 +167,20 @@ body {
   font-size: 1.5rem;
 }
 
+.titulo-impulsos-container {
+  display: flex;
+  align-items: center;       /* Alinha verticalmente */
+  justify-content: space-between; /* Título à esquerda, checkboxes à direita */
+  gap: 12px;                 /* Espaçamento entre os elementos */
+  margin-bottom: 8px;        /* Espaço abaixo do container */
+}
+
+.titulo-impulsos-container h2 {
+    margin: 0;                 /* Remove margem padrão */
+  white-space: nowrap;       /* Evita quebra do título */
+  font-weight: 700;
+  font-size: 1.8rem;
+}
 
 .impulsos-checkboxes input.checkbox-impulso {
   -webkit-appearance: none;
@@ -175,7 +189,7 @@ body {
   border-radius: 0;
   /* Transforma em círculo */
   width: 10px;
-  height: 20px;
+  height: 30px;
   border: 2px solid #000000;
   cursor: pointer;
   vertical-align: middle;
@@ -185,6 +199,14 @@ body {
    background-color: #000000;
   border-color: #000000;
 }
+
+.separador-impulsos-acoes {
+  border: none;
+  border-top: 2px solid #000; /* linha preta */
+  margin: 10px 0 15px 0; /* espaçamento acima e abaixo */
+  width: 100%;
+}
+
 
 .dourado-checkbox {
   appearance: none;
@@ -208,28 +230,27 @@ body {
 }
 
 .checkbox-acao {
-  appearance: none;
+ appearance: none;
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #000000; 
+  border: 2px solid #000000;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
-  position: relative;
-  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 6px;
-  transition: background-color 0.3s             /* ajusta levemente para baixo para alinhar */
+  vertical-align: baseline; /* ou remova */
+  transition: background-color 0.3s;
+  /* Removido position: relative */
   
 }
 
 .checkbox-acao:checked {
   background-color: #000;
 }
-
-
-
-
 
 .small {
   font-size: 0.8rem;

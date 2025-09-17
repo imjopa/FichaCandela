@@ -193,22 +193,21 @@ body {
 
 /* Estilo dos checkboxes impulsos - bolinhas mais estreitas */
 .impulsos-checkboxes input[type="checkbox"] {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
-  width: 14px;
-  /* um pouco mais estreito que o padrão 20px */
-  height: 20px;
-  /* um pouco mais alto que o padrão 18px */
+  width: 14px;      /* largura menor */
+  height: 30px;     /* altura maior para retângulo vertical */
   border: 2px solid #000;
-  border-radius: 50%;
-  /* mantém formato circular */
+  border-radius: 4px; /* bordas levemente arredondadas, ou 0 para retângulo puro */
   background-color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   vertical-align: middle;
+  outline: none;
+  background-clip: padding-box;
 }
+
 
 /* Checkbox marcado */
 .impulsos-checkboxes input[type="checkbox"]:checked {
@@ -216,6 +215,26 @@ body {
   border-color: #000;
 }
 
+.impulsos-maximo {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.impulsos-maximo .bola {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc; /* cor padrão das bolinhas */
+  border-radius: 50%;
+  border: 1px solid #000;
+  cursor: default;
+  transition: background-color 0.3s ease;
+}
+/* Bolinhas ativas (que indicam impulsos disponíveis) */
+.impulsos-maximo .bola.ativa {
+  background-color: #ffbf00; /* cor destacada */
+  border-color: #ffbf00;
+}
 
 
 /* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
@@ -224,13 +243,14 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 50%;
+  border-radius: 0;
   /* Transforma em círculo */
   width: 15px;
-  height: 18px;
+  height: 15px;
   border: 2px solid #000000;
   cursor: pointer;
   vertical-align: middle;
+  transform: rotate(45deg);
 }
 
 /* Estiliza quando o checkbox é marcado */
@@ -482,14 +502,17 @@ input[type=number]::-webkit-outer-spin-button {
 /* Container para Marcas e Cicatrizes lado a lado */
 .marcas-cicatrizes-container {
   display: flex;
-  gap: 15px; /* Espaço entre as sections, pode ajustar */
+  gap: 15px;
+  /* Espaço entre as sections, pode ajustar */
   margin-bottom: 30px;
-  justify-content: flex-start; /* Alinha à esquerda */
+  justify-content: flex-start;
+  /* Alinha à esquerda */
 }
 
 .section.marcas,
 .section.cicatrizes {
-  flex: 0 0 565px; /* largura fixa de 280px, sem crescer ou encolher */
+  flex: 0 0 565px;
+  /* largura fixa de 280px, sem crescer ou encolher */
   box-sizing: border-box;
   padding: 10px;
   background-color: #0a0a0a;
@@ -504,10 +527,13 @@ input[type=number]::-webkit-outer-spin-button {
 .header-black {
   background-color: #000;
   color: #fff;
-  padding: 8px 15px; /* Reduzido o padding */
+  padding: 8px 15px;
+  /* Reduzido o padding */
   text-align: center;
-  margin-bottom: 8px; /* Reduzido de 20px para 8px */
-  font-size: 1.3rem; /* Ajuste se quiser */
+  margin-bottom: 8px;
+  /* Reduzido de 20px para 8px */
+  font-size: 1.3rem;
+  /* Ajuste se quiser */
 }
 
 
@@ -637,22 +663,27 @@ input[type=number]::-webkit-outer-spin-button {
 /* Container para Relacionamentos e Equipamento lado a lado */
 .relacionamentos-e-equipamento-container {
   display: flex;
-  gap: 20px; /* Espaço entre as duas sections */
-  margin-top: 20px; /* Espaço acima do container */
+  gap: 20px;
+  /* Espaço entre as duas sections */
+  margin-top: 20px;
+  /* Espaço acima do container */
 }
 
 /* Cada subsection ocupa metade da largura */
 .subsection.relacionamentos,
 .subsection.equipamento {
-  flex: 1; /* Ocupa igualmente o espaço disponível */
+  flex: 1;
+  /* Ocupa igualmente o espaço disponível */
   box-sizing: border-box;
   padding: 15px;
   border: 2px solid #000;
   background-color: #f5f5f5;
   font-family: "Jim Nightshade", cursive;
   font-size: 1.1rem;
-  max-height: 400px; /* Ajuste conforme desejar */
-  overflow-y: auto; /* Scroll vertical se o conteúdo ultrapassar a altura */
+  max-height: 400px;
+  /* Ajuste conforme desejar */
+  overflow-y: auto;
+  /* Scroll vertical se o conteúdo ultrapassar a altura */
 }
 
 /* Títulos das subsections */

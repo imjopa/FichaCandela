@@ -215,6 +215,8 @@ body {
   border-color: #000;
 }
 
+
+
 /* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
 .atributo label input:first-of-type {
   /* Altere o formato com CSS */

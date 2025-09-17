@@ -55,21 +55,65 @@ function preencherFormulario(dados) {
   }
 }
 
-const impulsosCheckboxes = document.querySelectorAll('.checkbox-impulso');
-impulsosCheckboxes.forEach(cb => {
-  cb.addEventListener('change', () => {
-    // Código específico para impulsos
-    console.log('Impulso alterado:', cb.name, cb.checked);
+// function gerarImpulsosAtributo(atributoDiv, quantidade) {
+//   const container = atributoDiv.querySelector('.impulsos-checkboxes');
+//   if (!container) return;
+//   container.innerHTML = ''; // limpa os checkboxes atuais
+//   for (let i = 0; i < quantidade; i++) {
+//     const checkbox = document.createElement('input');
+//     checkbox.type = 'checkbox';
+//     checkbox.name = `${atributoDiv.id}_impulso_${i + 1}`;
+//     checkbox.id = `${atributoDiv.id}_impulso_${i + 1}`;
+//     checkbox.classList.add('checkbox-impulso');
+//     checkbox.addEventListener('change', () => {
+//       console.log('Impulso alterado:', checkbox.name, checkbox.checked);
+//     });
+//     container.appendChild(checkbox);
+//   }
+// }
+
+
+function inicializarControleMaxImpulsos() {
+  const maxImpulsosInputs = document.querySelectorAll('.max-impulsos-input');
+  maxImpulsosInputs.forEach(input => {
+    const atributo = input.dataset.atributo;
+    const checkboxes = document.querySelectorAll(`#${atributo} .checkbox-impulso`);
+    // Atualiza o estado dos checkboxes ao mudar o valor máximo
+    input.addEventListener('input', () => {
+      let max = parseInt(input.value);
+      if (isNaN(max) || max < 1) max = 1;
+      if (max > 9) max = 9;
+      input.value = max;
+      atualizarImpulsosPermitidos(checkboxes, max);
+    });
+    // Inicializa o estado dos checkboxes
+    let max = parseInt(input.value);
+    if (isNaN(max) || max < 1) max = 1;
+    if (max > 9) max = 9;
+    atualizarImpulsosPermitidos(checkboxes, max);
   });
+}
+
+function atualizarImpulsosPermitidos(checkboxes, max) {
+  checkboxes.forEach((cb, index) => {
+    if (index < max) {
+      cb.disabled = false;
+      cb.parentElement.style.opacity = '1'; // opcional para visual
+    } else {
+      cb.disabled = true;
+      cb.checked = false; // desmarca se estava marcado
+      cb.parentElement.style.opacity = '0.4'; // opcional para visual
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  inicializarControleMaxImpulsos();
+  // Outros códigos de inicialização que você já tenha...
 });
 
-const acoesCheckboxes = document.querySelectorAll('.checkbox-acao');
-acoesCheckboxes.forEach(cb => {
-  cb.addEventListener('change', () => {
-    // Código específico para ações
-    console.log('Ação alterada:', cb);
-  });
-});
+
+
 
 // Função para gerar checkboxes para uma categoria
 function gerarMarcasCategoria(categoriaDiv, quantidade) {

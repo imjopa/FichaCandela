@@ -168,36 +168,76 @@ body {
 }
 
 .titulo-impulsos-container {
-  display: flex;
-  align-items: center;       /* Alinha verticalmente */
-  justify-content: space-between; /* Título à esquerda, checkboxes à direita */
-  gap: 12px;                 /* Espaçamento entre os elementos */
-  margin-bottom: 8px;        /* Espaço abaixo do container */
+  margin-bottom: 15px;
 }
 
-.titulo-impulsos-container h2 {
-    margin: 0;                 /* Remove margem padrão */
-  white-space: nowrap;       /* Evita quebra do título */
+.titulo-e-maximo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.titulo-e-maximo h2 {
+  margin: 0;
   font-weight: 700;
   font-size: 1.8rem;
+  font-family: "Jim Nightshade", cursive;
 }
 
-.impulsos-checkboxes input.checkbox-impulso {
+.max-impulsos-control {
+  font-family: "Jim Nightshade", cursive;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.max-impulsos-control input {
+  
+  font-size: 1rem;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.impulsos-checkboxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 280px; /* ajusta conforme o espaço disponível */
+  margin: 0 auto; /* centraliza horizontalmente */
+}
+
+.impulsos-checkboxes input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-impulso {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
-  border-radius: 0;
-  /* Transforma em círculo */
-  width: 10px;
-  height: 30px;
-  border: 2px solid #000000;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 3px;
   cursor: pointer;
-  vertical-align: middle;
+  position: relative;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 }
-
-.impulsos-checkboxes input.checkbox-impulso:checked {
-   background-color: #000000;
-  border-color: #000000;
+/* Quando marcado, deixa o quadrado totalmente preto */
+.checkbox-impulso:checked {
+  background-color: #000;
+  border-color: #000;
+}
+/* Remove o foco padrão e adiciona um contorno personalizado */
+.checkbox-impulso:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px rgba(0,0,0,0.5);
 }
 
 .separador-impulsos-acoes {
@@ -206,6 +246,21 @@ body {
   margin: 10px 0 15px 0; /* espaçamento acima e abaixo */
   width: 100%;
 }
+
+.max-impulsos-control {
+  flex: 0 0 auto; /* Tamanho fixo */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.max-impulsos-control input {
+  width: 50px;
+  padding: 4px;
+  font-size: 1rem;
+}
+
 
 
 .dourado-checkbox {
@@ -549,9 +604,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .section.cicatrizes input[type="checkbox"]:checked {
-  background-color: #ffbf00;
-  border-color: #ffbf00;
-  box-shadow: 0 0 8px #ffbf00;
+  background-color: #473030;
+  border-color:#4d1d1d;
+  box-shadow: 0 0 8px #ff0000;
 }
 
 .linha-cicatriz label {

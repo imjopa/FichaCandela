@@ -22,420 +22,383 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Elementos do DOM
-const listaFichasEl = document.getElementById("listaFichas");
-const btnNovaFicha = document.getElementById("btnNovaFicha");
 const fichaForm = document.getElementById("fichaForm");
+const listaFichas = document.getElementById("listaFichas");
+const btnNovaFicha = document.getElementById("btnNovaFicha");
 
-// Variável para guardar a ficha selecionada (id do documento)
-let fichaSelecionadaId = null;
+// Array de marcas para cada categoria (exemplo, ajuste conforme seu jogo)
+const MARCAS = {
+  corpo: [
+    "Marca de Força",
+    "Marca de Resistência",
+    "Marca de Agilidade",
+    "Marca de Vigor",
+    "Marca de Vitalidade",
+    "Marca Extra 6",
+    "Marca Extra 7",
+    "Marca Extra 8",
+    "Marca Extra 9",
+    "Marca Extra 10",
+    // ... até 20 se quiser
+  ],
+  mente: [
+    "Marca de Inteligência",
+    "Marca de Sabedoria",
+    "Marca de Carisma",
+    "Marca de Percepção",
+    "Marca de Memória",
+    "Marca Extra 6",
+    "Marca Extra 7",
+    "Marca Extra 8",
+    "Marca Extra 9",
+    "Marca Extra 10",
+  ],
+  sangria: [
+    "Marca de Sangue 1",
+    "Marca de Sangue 2",
+    "Marca de Sangue 3",
+    "Marca de Sangue 4",
+    "Marca de Sangue 5",
+    "Marca Extra 6",
+    "Marca Extra 7",
+    "Marca Extra 8",
+    "Marca Extra 9",
+    "Marca Extra 10",
+  ],
+};
 
-// Cria um item da lista de fichas com botão excluir
-function criarItemFicha(id, nome) {
-  const li = document.createElement("li");
-  li.textContent = nome || "(Sem nome)";
-  li.dataset.id = id;
+function renderizarMarcas() {
+  document.querySelectorAll(".categoria").forEach((categoriaDiv) => {
+    const categoria = categoriaDiv.dataset.categoria;
+    const maxInput = categoriaDiv.querySelector(".max-marcas-input");
+    let maxMarcas = parseInt(maxInput.value, 10);
 
-  const btnExcluir = document.createElement("button");
-  btnExcluir.textContent = "X";
-  btnExcluir.classList.add("btn-excluir");
-  btnExcluir.title = "Excluir ficha";
-  btnExcluir.addEventListener("click", async (e) => {
-    e.stopPropagation();
-    if (confirm("Deseja realmente excluir esta ficha?")) {
-      await excluirFicha(id);
+    // Limita o máximo para não ultrapassar o total de marcas disponíveis
+    const totalMarcasDisponiveis = MARCAS[categoria].length;
+    if (maxMarcas > totalMarcasDisponiveis) {
+      maxMarcas = totalMarcasDisponiveis;
+      maxInput.value = maxMarcas; // Atualiza o input para o máximo permitido
     }
-  });
+    if (maxMarcas < 1) {
+      maxMarcas = 1;
+      maxInput.value = maxMarcas;
+    }
 
-  li.appendChild(btnExcluir);
+    const lista = categoriaDiv.querySelector(".marcas-lista");
 
-  li.addEventListener("click", () => {
-    selecionarFicha(id);
-  });
+    // Limpa lista antes de renderizar
+    lista.innerHTML = "";
 
-  return li;
-}
+    // Cria os itens de marca com checkbox, só até maxMarcas
+    for (let idx = 0; idx < maxMarcas; idx++) {
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = `marca_${categoria}_${idx}`;
+      checkbox.classList.add("marca-checkbox");
+      checkbox.dataset.categoria = categoria;
+      checkbox.dataset.index = idx;
+      li.appendChild(checkbox);
+      // Não adiciona texto ao lado do checkbox
+      lista.appendChild(li);
+    }
 
-// Carrega lista de fichas do usuário logado
-async function carregarListaFichas(userUid) {
-  listaFichasEl.innerHTML = "";
-  const fichasRef = collection(db, "fichas");
-  const q = query(fichasRef, where("userUid", "==", userUid));
-  const querySnapshot = await getDocs(q);
 
-  querySnapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    const li = criarItemFicha(docSnap.id, data.nome);
-    listaFichasEl.appendChild(li);
-  });
-}
-
-// Seleciona uma ficha para edição
-async function selecionarFicha(id) {
-  fichaSelecionadaId = id;
-
-  // Marca visualmente a ficha selecionada
-  Array.from(listaFichasEl.children).forEach((li) => {
-    li.classList.toggle("selecionada", li.dataset.id === id);
-  });
-
-  // Carrega dados da ficha e preenche o formulário
-  const docRef = doc(db, "fichas", id);
-  const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
-    alert("Ficha não encontrada!");
-    return;
-  }
-  const data = docSnap.data();
-  preencherFormulario(data);
-}
-
-// Preenche o formulário com os dados da ficha
-function preencherFormulario(data) {
-  // Dados gerais simples
-  fichaForm.nome.value = data.nome || "";
-  fichaForm.papel.value = data.papel || "";
-  fichaForm.espec.value = data.espec || "";
-  fichaForm.circulo.value = data.circulo || "";
-  fichaForm.plano.value = data.plano || "";
-  fichaForm.religiao.value = data.religiao || "";
-
-  // Atributos (corpo, astucia, intuicao)
-  ["corpo", "astucia", "intuicao"].forEach((atributo) => {
-    const maxImpulsoInput = fichaForm.querySelector(`input.max-impulsos-input[data-atributo="${atributo}"]`);
-    maxImpulsoInput.value = data.atributos?.[atributo]?.maxImpulsos || 1;
-
-    const impulsosCheckboxes = fichaForm.querySelectorAll(`input.checkbox-impulso[name^="${atributo}_impulso_"]`);
-    impulsosCheckboxes.forEach((checkbox, i) => {
-      checkbox.checked = data.atributos?.[atributo]?.impulsos?.[i] || false;
-    });
-
-    const atributoDiv = fichaForm.querySelector(`div.atributo#${atributo}`);
-    if (!atributoDiv) return;
-
-    const douradoCheckboxes = atributoDiv.querySelectorAll("input.dourado-checkbox");
-    douradoCheckboxes.forEach((douradoCheckbox, idx) => {
-      douradoCheckbox.checked = data.atributos?.[atributo]?.acoes?.[idx]?.dourado || false;
-
-      const label = douradoCheckbox.parentElement;
-      const acoesCheckboxes = label.querySelectorAll("input.checkbox-acao");
-      acoesCheckboxes.forEach((acaoCheckbox, i) => {
-        acaoCheckbox.checked = data.atributos?.[atributo]?.acoes?.[idx]?.acoes?.[i] || false;
+    // Controla máximo selecionável (opcional, se quiser limitar seleção)
+    lista.addEventListener("change", () => {
+      const checked = lista.querySelectorAll("input[type=checkbox]:checked")
+        .length;
+      lista.querySelectorAll("input[type=checkbox]").forEach((cb) => {
+        if (!cb.checked) cb.disabled = checked >= maxMarcas;
       });
     });
-  });
 
-  // Habilidades do papel e especialidade
-  fichaForm.papelDescricao.value = data.papelDescricao || "";
-  fichaForm.especialidade.value = data.especialidade || "";
-
-  // Marcas (corpo, mente, sangria)
-  ["corpo", "mente", "sangria"].forEach((categoria) => {
-    const categoriaDiv = fichaForm.querySelector(`.categoria[data-categoria="${categoria}"]`);
-    if (!categoriaDiv) return;
-
-    const maxMarcasInput = categoriaDiv.querySelector("input.max-marcas-input");
-    maxMarcasInput.value = data.marcas?.[categoria]?.maxMarcas || 3;
-
-    const marcasLista = categoriaDiv.querySelector("ul.marcas-lista");
-    marcasLista.innerHTML = "";
-    const marcas = data.marcas?.[categoria]?.itens || [];
-    marcas.forEach((marca) => {
-      const li = document.createElement("li");
-      li.textContent = marca;
-      marcasLista.appendChild(li);
+    // Atualiza a lista ao mudar o input max-marcas-input
+    maxInput.addEventListener("input", () => {
+      renderizarMarcas(); // Re-renderiza toda a lista para refletir o novo máximo
     });
   });
+}
 
-  // Cicatrizes (checkbox + descrição)
-  for (let i = 1; i <= 3; i++) {
-    const cicatrizCheckbox = fichaForm.querySelector(`input[name="cicatriz_${i}"]`);
-    const cicatrizDesc = fichaForm.querySelector(`input[name="desc_cicatriz_${i}"]`);
-    if (cicatrizCheckbox) cicatrizCheckbox.checked = data.cicatrizes?.[`cicatriz_${i}`]?.checked || false;
-    if (cicatrizDesc) cicatrizDesc.value = data.cicatrizes?.[`cicatriz_${i}`]?.descricao || "";
+// Chame renderizarMarcas() ao carregar a página para inicializar
+window.addEventListener("load", () => {
+  renderizarMarcas();
+});
+
+
+// --- Função para salvar ficha no Firestore ---
+async function salvarFicha() {
+  if (!auth.currentUser) {
+    alert("Usuário não autenticado.");
+    return;
+  }
+  const userId = auth.currentUser.uid;
+
+  // Coleta dados do formulário
+  const formData = new FormData(fichaForm);
+  const data = {};
+
+  // Campos simples
+  for (const [key, value] of formData.entries()) {
+    data[key] = value;
   }
 
-  // Relacionamentos (lista de inputs)
-  const relInputs = fichaForm.querySelectorAll(".lista-relacionamento input[type=text]");
-  const rels = data.relacionamentos || [];
-  relInputs.forEach((input, i) => {
-    input.value = rels[i] || "";
+  // Impulsos: para cada atributo, salva array de booleanos
+  ["corpo", "astucia", "intuicao"].forEach((atributo) => {
+    const checkboxes = document.querySelectorAll(
+      `#${atributo} .checkbox-impulso`
+    );
+    data[`${atributo}_impulsos`] = Array.from(checkboxes).map((cb) => cb.checked);
+    // Também salva o máximo definido
+    const maxInput = document.querySelector(
+      `#${atributo} .max-impulsos-input`
+    );
+    data[`${atributo}_impulsos_max`] = parseInt(maxInput.value, 10);
   });
 
-  // Equipamento (checkbox + texto)
-  const equipItems = fichaForm.querySelectorAll(".lista-equipamento li");
-  const equipamentos = data.equipamento || [];
-  equipItems.forEach((li, i) => {
+  // Marcas: para cada categoria, salva array de booleanos
+  ["corpo", "mente", "sangria"].forEach((categoria) => {
+    const checkboxes = document.querySelectorAll(
+      `.categoria[data-categoria="${categoria}"] .marca-checkbox`
+    );
+    data[`marcas_${categoria}`] = Array.from(checkboxes).map((cb) => cb.checked);
+    // Também salva o máximo definido
+    const maxInput = document.querySelector(
+      `.categoria[data-categoria="${categoria}"] .max-marcas-input`
+    );
+    data[`marcas_${categoria}_max`] = parseInt(maxInput.value, 10);
+  });
+
+  // Cicatrizes: checkbox e descrição
+  data.cicatrizes = [];
+  for (let i = 1; i <= 3; i++) {
+    const marcado = fichaForm.querySelector(`input[name="cicatriz_${i}"]`)
+      .checked;
+    const desc = fichaForm.querySelector(`input[name="desc_cicatriz_${i}"]`).value;
+    data.cicatrizes.push({ marcado, descricao: desc });
+  }
+
+  // Relacionamentos (inputs de texto na lista)
+  data.relacionamentos = Array.from(
+    fichaForm.querySelectorAll(".lista-relacionamento input[type=text]")
+  ).map((input) => input.value);
+
+  // Equipamentos (checkbox + texto)
+  data.equipamentos = Array.from(
+    fichaForm.querySelectorAll(".lista-equipamento li")
+  ).map((li) => {
     const checkbox = li.querySelector("input[type=checkbox]");
-    const textInput = li.querySelector("input[type=text]");
-    if (checkbox) checkbox.checked = equipamentos[i]?.checked || false;
-    if (textInput) textInput.value = equipamentos[i]?.descricao || "";
+    const texto = li.querySelector("input[type=text]").value;
+    return { marcado: checkbox.checked, descricao: texto };
   });
 
   // Notas e habilidades de círculo (textareas)
-  const notasTextarea = fichaForm.querySelector(".subsection.notas textarea");
-  const habilidadesCirculoTextarea = fichaForm.querySelector(".subsection.habilidades-circulo textarea");
-  if (notasTextarea) notasTextarea.value = data.notas || "";
-  if (habilidadesCirculoTextarea) habilidadesCirculoTextarea.value = data.habilidadesCirculo || "";
+  data.notas = fichaForm.querySelector(".subsection.notas textarea").value;
+  data.habilidadesCirculo = fichaForm.querySelector(
+    ".subsection.habilidades-circulo textarea"
+  ).value;
 
-  // Atualiza a limitação dos impulsos para refletir o valor carregado
-  ["corpo", "astucia", "intuicao"].forEach(atributo => {
-    atualizarLimiteImpulsos(atributo);
-  });
-}
+  // Papel e especialidade (textareas)
+  data.papelDescricao = fichaForm.querySelector(
+    "section.papel-especialidade textarea[name=papelDescricao]"
+  ).value;
+  data.especialidade = fichaForm.querySelector(
+    "section.papel-especialidade textarea[name=especialidade]"
+  ).value;
 
-// Lê os dados do formulário e retorna um objeto com a ficha
-function lerFormulario() {
-  const data = {};
-
-  data.nome = fichaForm.nome.value.trim();
-  data.papel = fichaForm.papel.value.trim();
-  data.espec = fichaForm.espec.value.trim();
-  data.circulo = fichaForm.circulo.value.trim();
-  data.plano = fichaForm.plano.value.trim();
-  data.religiao = fichaForm.religiao.value.trim();
-
-  data.atributos = {};
-  ["corpo", "astucia", "intuicao"].forEach((atributo) => {
-    data.atributos[atributo] = {};
-
-    const maxImpulsoInput = fichaForm.querySelector(`input.max-impulsos-input[data-atributo="${atributo}"]`);
-    data.atributos[atributo].maxImpulsos = Number(maxImpulsoInput.value) || 1;
-
-    const impulsosCheckboxes = fichaForm.querySelectorAll(`input.checkbox-impulso[name^="${atributo}_impulso_"]`);
-    data.atributos[atributo].impulsos = Array.from(impulsosCheckboxes).map(cb => cb.checked);
-
-    const atributoDiv = fichaForm.querySelector(`div.atributo#${atributo}`);
-    const douradoCheckboxes = atributoDiv.querySelectorAll("input.dourado-checkbox");
-    data.atributos[atributo].acoes = Array.from(douradoCheckboxes).map(douradoCheckbox => {
-      const label = douradoCheckbox.parentElement;
-      const acoesCheckboxes = label.querySelectorAll("input.checkbox-acao");
-      return {
-        dourado: douradoCheckbox.checked,
-        acoes: Array.from(acoesCheckboxes).map(cb => cb.checked)
-      };
-    });
-  });
-
-  data.papelDescricao = fichaForm.papelDescricao.value.trim();
-  data.especialidade = fichaForm.especialidade.value.trim();
-
-  data.marcas = {};
-  ["corpo", "mente", "sangria"].forEach((categoria) => {
-    const categoriaDiv = fichaForm.querySelector(`.categoria[data-categoria="${categoria}"]`);
-    const maxMarcasInput = categoriaDiv.querySelector("input.max-marcas-input");
-    const marcasLista = categoriaDiv.querySelector("ul.marcas-lista");
-    const itens = Array.from(marcasLista.children).map(li => li.textContent.trim());
-    data.marcas[categoria] = {
-      maxMarcas: Number(maxMarcasInput.value) || 3,
-      itens
-    };
-  });
-
-  data.cicatrizes = {};
-  for (let i = 1; i <= 3; i++) {
-    const cicatrizCheckbox = fichaForm.querySelector(`input[name="cicatriz_${i}"]`);
-    const cicatrizDesc = fichaForm.querySelector(`input[name="desc_cicatriz_${i}"]`);
-    data.cicatrizes[`cicatriz_${i}`] = {
-      checked: cicatrizCheckbox?.checked || false,
-      descricao: cicatrizDesc?.value.trim() || ""
-    };
-  }
-
-  const relInputs = fichaForm.querySelectorAll(".lista-relacionamento input[type=text]");
-  data.relacionamentos = Array.from(relInputs).map(input => input.value.trim());
-
-  const equipItems = fichaForm.querySelectorAll(".lista-equipamento li");
-  data.equipamento = Array.from(equipItems).map(li => {
-    const checkbox = li.querySelector("input[type=checkbox]");
-    const textInput = li.querySelector("input[type=text]");
-    return {
-      checked: checkbox?.checked || false,
-      descricao: textInput?.value.trim() || ""
-    };
-  });
-
-  const notasTextarea = fichaForm.querySelector(".subsection.notas textarea");
-  const habilidadesCirculoTextarea = fichaForm.querySelector(".subsection.habilidades-circulo textarea");
-  data.notas = notasTextarea?.value.trim() || "";
-  data.habilidadesCirculo = habilidadesCirculoTextarea?.value.trim() || "";
-
-  return data;
-}
-
-// Salva a ficha no Firestore
-async function salvarFicha(userUid) {
-  if (!userUid) {
-    alert("Usuário não autenticado.");
-    return;
-  }
-
-  const data = lerFormulario();
-  data.userUid = userUid;
-
-  if (!fichaSelecionadaId) {
-    alert("Nenhuma ficha selecionada para salvar.");
+  // Nome da ficha para identificar
+  if (!data.nome || data.nome.trim() === "") {
+    alert("Por favor, preencha o nome da ficha.");
     return;
   }
 
   try {
-    await setDoc(doc(db, "fichas", fichaSelecionadaId), data);
+    // Se fichaAtualId não existe, cria um novo doc com id baseado no nome
+    if (!fichaAtualId) {
+      fichaAtualId = data.nome.trim().toLowerCase().replace(/\s+/g, "_");
+    }
+    await setDoc(doc(db, "fichas", fichaAtualId), data);
     alert("Ficha salva com sucesso!");
-    await carregarListaFichas(userUid);
+    carregarListaFichas();
   } catch (error) {
     console.error("Erro ao salvar ficha:", error);
-    alert("Erro ao salvar ficha: " + error.message);
+    alert("Erro ao salvar ficha. Veja o console para detalhes.");
   }
 }
 
-// Cria uma nova ficha vazia
-async function criarNovaFicha(userUid) {
-  if (!userUid) {
+// --- Função para carregar ficha do Firestore ---
+async function carregarFicha(id) {
+  if (!auth.currentUser) {
     alert("Usuário não autenticado.");
     return;
   }
-
-  const fichasRef = collection(db, "fichas");
-  const novoDocRef = doc(fichasRef);
-
-  const novaFicha = {
-    nome: "Nova Ficha",
-    papel: "",
-    espec: "",
-    circulo: "",
-    plano: "",
-    religiao: "",
-    atributos: {
-      corpo: { maxImpulsos: 1, impulsos: Array(9).fill(false), acoes: [] },
-      astucia: { maxImpulsos: 1, impulsos: Array(9).fill(false), acoes: [] },
-      intuicao: { maxImpulsos: 1, impulsos: Array(9).fill(false), acoes: [] }
-    },
-    papelDescricao: "",
-    especialidade: "",
-    marcas: {
-      corpo: { maxMarcas: 3, itens: [] },
-      mente: { maxMarcas: 3, itens: [] },
-      sangria: { maxMarcas: 3, itens: [] }
-    },
-    cicatrizes: {
-      cicatriz_1: { checked: false, descricao: "" },
-      cicatriz_2: { checked: false, descricao: "" },
-      cicatriz_3: { checked: false, descricao: "" }
-    },
-    relacionamentos: Array(9).fill(""),
-    equipamento: Array(6).fill({ checked: false, descricao: "" }),
-    notas: "",
-    habilidadesCirculo: "",
-    userUid
-  };
-
   try {
-    await setDoc(novoDocRef, novaFicha);
-    fichaSelecionadaId = novoDocRef.id;
-    await carregarListaFichas(userUid);
-    selecionarFicha(fichaSelecionadaId);
-  } catch (error) {
-    console.error("Erro ao criar nova ficha:", error);
-    alert("Erro ao criar nova ficha: " + error.message);
-  }
-}
-
-// Exclui uma ficha
-async function excluirFicha(id) {
-  if (!id) return;
-  if (!confirm("Confirma exclusão da ficha?")) return;
-
-  try {
-    await deleteDoc(doc(db, "fichas", id));
-    if (fichaSelecionadaId === id) {
-      fichaSelecionadaId = null;
-      fichaForm.reset();
+    const docRef = doc(db, "fichas", id);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      alert("Ficha não encontrada.");
+      return;
     }
-    const userUid = auth.currentUser ?.uid;
-    if (userUid) await carregarListaFichas(userUid);
-  } catch (error) {
-    console.error("Erro ao excluir ficha:", error);
-    alert("Erro ao excluir ficha: " + error.message);
-  }
-}
+    const data = docSnap.data();
+    fichaAtualId = id;
 
-// Limita a quantidade de impulsos marcados conforme o máximo
-function atualizarLimiteImpulsos(atributo) {
-  const maxImpulsoInput = fichaForm.querySelector(`input.max-impulsos-input[data-atributo="${atributo}"]`);
-  const impulsosCheckboxes = fichaForm.querySelectorAll(`input.checkbox-impulso[name^="${atributo}_impulso_"]`);
+    // Preenche campos simples
+    for (const key in data) {
+      const el = fichaForm.elements[key];
+      if (!el) continue;
 
-  const maxImpulsos = Number(maxImpulsoInput.value) || 1;
-
-  function contarMarcados() {
-    return Array.from(impulsosCheckboxes).filter(cb => cb.checked).length;
-  }
-
-  function atualizarCheckboxes() {
-    const marcados = contarMarcados();
-    impulsosCheckboxes.forEach(cb => {
-      if (!cb.checked) {
-        cb.disabled = marcados >= maxImpulsos;
+      if (el.type === "checkbox") {
+        el.checked = data[key];
+      } else if (el.length && el[0].type === "checkbox") {
+        // Grupo de checkboxes (não usado aqui, mas pode adaptar)
       } else {
-        cb.disabled = false;
-      }
-    });
-  }
-
- maxImpulsoInput.addEventListener("input", () => {
-  let max = Number(maxImpulsoInput.value);
-  if (isNaN(max) || max < 1) max = 1;
-  if (max > 9) max = 9;
-  maxImpulsoInput.value = max;
-
-  let marcados = contarMarcados();
-
-  if (marcados > max) {
-    for (let i = impulsosCheckboxes.length - 1; i >= 0; i--) {
-      if (impulsosCheckboxes[i].checked) {
-        impulsosCheckboxes[i].checked = false;
-        marcados--;
-        if (marcados <= max) break;
+        el.value = data[key];
       }
     }
-  }
-  atualizarCheckboxes();
-});
 
-
-  impulsosCheckboxes.forEach(cb => {
-    cb.addEventListener("change", () => {
-      atualizarCheckboxes();
+    // Preenche impulsos
+    ["corpo", "astucia", "intuicao"].forEach((atributo) => {
+      const checkboxes = document.querySelectorAll(
+        `#${atributo} .checkbox-impulso`
+      );
+      const maxInput = document.querySelector(
+        `#${atributo} .max-impulsos-input`
+      );
+      if (data[`${atributo}_impulsos_max`]) {
+        maxInput.value = data[`${atributo}_impulsos_max`];
+      }
+      if (data[`${atributo}_impulsos`]) {
+        data[`${atributo}_impulsos`].forEach((checked, idx) => {
+          if (checkboxes[idx]) checkboxes[idx].checked = checked;
+        });
+      }
     });
-  });
+    atualizarImpulsos();
 
-  atualizarCheckboxes();
+    // Preenche marcas
+    ["corpo", "mente", "sangria"].forEach((categoria) => {
+      const checkboxes = document.querySelectorAll(
+        `.categoria[data-categoria="${categoria}"] .marca-checkbox`
+      );
+      const maxInput = document.querySelector(
+        `.categoria[data-categoria="${categoria}"] .max-marcas-input`
+      );
+      if (data[`marcas_${categoria}_max`]) {
+        maxInput.value = data[`marcas_${categoria}_max`];
+      }
+      if (data[`marcas_${categoria}`]) {
+        data[`marcas_${categoria}`].forEach((checked, idx) => {
+          if (checkboxes[idx]) checkboxes[idx].checked = checked;
+        });
+      }
+      // Dispara evento para aplicar limite
+      maxInput.dispatchEvent(new Event("input"));
+    });
+
+    // Cicatrizes
+    if (data.cicatrizes) {
+      data.cicatrizes.forEach((cicatriz, idx) => {
+        const cb = fichaForm.querySelector(`input[name="cicatriz_${idx + 1}"]`);
+        const desc = fichaForm.querySelector(
+          `input[name="desc_cicatriz_${idx + 1}"]`
+        );
+        if (cb) cb.checked = cicatriz.marcado;
+        if (desc) desc.value = cicatriz.descricao || "";
+      });
+    }
+
+    // Relacionamentos
+    if (data.relacionamentos) {
+      const inputs = fichaForm.querySelectorAll(".lista-relacionamento input[type=text]");
+      data.relacionamentos.forEach((rel, idx) => {
+        if (inputs[idx]) inputs[idx].value = rel;
+      });
+    }
+
+    // Equipamentos
+    if (data.equipamentos) {
+      const lis = fichaForm.querySelectorAll(".lista-equipamento li");
+      data.equipamentos.forEach((equip, idx) => {
+        if (lis[idx]) {
+          const cb = lis[idx].querySelector("input[type=checkbox]");
+          const txt = lis[idx].querySelector("input[type=text]");
+          if (cb) cb.checked = equip.marcado;
+          if (txt) txt.value = equip.descricao || "";
+        }
+      });
+    }
+
+    // Notas e habilidades de círculo
+    const notasEl = fichaForm.querySelector(".subsection.notas textarea");
+    if (notasEl && data.notas) notasEl.value = data.notas;
+    const habCircEl = fichaForm.querySelector(".subsection.habilidades-circulo textarea");
+    if (habCircEl && data.habilidadesCirculo) habCircEl.value = data.habilidadesCirculo;
+
+    // Papel e especialidade
+    const papelDescEl = fichaForm.querySelector(
+      "section.papel-especialidade textarea[name=papelDescricao]"
+    );
+    if (papelDescEl && data.papelDescricao) papelDescEl.value = data.papelDescricao;
+    const especialidadeEl = fichaForm.querySelector(
+      "section.papel-especialidade textarea[name=especialidade]"
+    );
+    if (especialidadeEl && data.especialidade) especialidadeEl.value = data.especialidade;
+
+  } catch (error) {
+    console.error("Erro ao carregar ficha:", error);
+    alert("Erro ao carregar ficha. Veja o console para detalhes.");
+  }
 }
 
-// Inicializa os controles de impulsos para cada atributo
-["corpo", "astucia", "intuicao"].forEach(atributo => {
-  atualizarLimiteImpulsos(atributo);
+// --- Função para carregar lista de fichas do usuário ---
+async function carregarListaFichas() {
+  if (!auth.currentUser) return;
+  const userId = auth.currentUser.uid;
+
+  listaFichas.innerHTML = "";
+
+  try {
+    // Busca todas as fichas (aqui simplificado: todas fichas, ideal filtrar por usuário)
+    const querySnapshot = await getDocs(collection(db, "fichas"));
+    querySnapshot.forEach((docSnap) => {
+      const li = document.createElement("li");
+      li.textContent = docSnap.data().nome || docSnap.id;
+      li.dataset.id = docSnap.id;
+      li.addEventListener("click", () => {
+        carregarFicha(docSnap.id);
+      });
+      listaFichas.appendChild(li);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar lista de fichas:", error);
+  }
+}
+
+// --- Inicialização ---
+window.addEventListener("load", () => {
+  atualizarImpulsos();
+  renderizarMarcas();
+  carregarListaFichas();
 });
 
-// Evento submit do formulário para salvar ficha
+// Atualiza impulsos ao mudar input
+document.querySelectorAll(".max-impulsos-input").forEach((input) => {
+  input.addEventListener("input", atualizarImpulsos);
+});
+
+// Atualiza marcas ao mudar max-marcas-input (já tratado na renderizarMarcas)
+
+// Salvar ficha ao enviar formulário
 fichaForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const userUid = auth.currentUser ?.uid;
-  await salvarFicha(userUid);
+  await salvarFicha();
 });
 
-// Evento botão nova ficha
-btnNovaFicha.addEventListener("click", async () => {
-  const userUid = auth.currentUser ?.uid;
-  await criarNovaFicha(userUid);
-});
-
-// Observa estado de autenticação
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
-  await carregarListaFichas(user.uid);
-  fichaSelecionadaId = null;
+// Botão nova ficha limpa formulário e reseta estado
+btnNovaFicha.addEventListener("click", () => {
+  fichaAtualId = null;
   fichaForm.reset();
+  atualizarImpulsos();
+  renderizarMarcas();
 });
+

@@ -80,7 +80,6 @@ body {
   color: #000;
 }
 
-
 .btn-logout {
   cursor: pointer;
   font-family: "Jim Nightshade", cursive;
@@ -168,100 +167,30 @@ body {
   font-size: 1.5rem;
 }
 
-/* Container flexível para título e impulsos */
-.titulo-impulsos-container {
-  display: flex;
-  align-items: center;
-  gap: 95px;
-  /* Espaço entre título e impulsos */
-  margin-bottom: 10px;
-  border-bottom: 1px solid #000;
-  /* linha que separa título + impulsos do conteúdo */
-  padding-bottom: 5px;
-  /* espaçamento interno para a linha não colar no texto */
-}
 
-/* Container dos impulsos */
-.impulsos-checkboxes {
-  display: flex;
-  gap: 6px;
-  flex-wrap: nowrap;
-  align-items: center;
-  /* opcional: limite máximo de largura para não estourar */
-  max-width: 170px;
-}
-
-/* Estilo dos checkboxes impulsos - bolinhas mais estreitas */
-.impulsos-checkboxes input[type="checkbox"] {
-    -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 14px;      /* largura menor */
-  height: 30px;     /* altura maior para retângulo vertical */
-  border: 2px solid #000;
-  border-radius: 4px; /* bordas levemente arredondadas, ou 0 para retângulo puro */
-  background-color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-  vertical-align: middle;
-  outline: none;
-  background-clip: padding-box;
-}
-
-
-/* Checkbox marcado */
-.impulsos-checkboxes input[type="checkbox"]:checked {
-  background-color: #000;
-  border-color: #000;
-}
-
-
-
-/* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
-.atributo label input:first-of-type {
-  /* Altere o formato com CSS */
+.impulsos-checkboxes input.checkbox-impulso {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border-radius: 0;
   /* Transforma em círculo */
-  width: 15px;
-  height: 15px;
-  border: 2px solid #000000;
+  width: 10px;
+  height: 20px;
+  border: 1px solid #000000;
   cursor: pointer;
   vertical-align: middle;
-  transform: rotate(45deg);
 }
 
-/* Estiliza quando o checkbox é marcado */
-.atributo label input:first-of-type:checked {
-  background-color: #ffbf00;
+.impulsos-checkboxes input.checkbox-impulso:checked {
+   background-color: #000000;
   border-color: #000000;
 }
 
-.atributo input[type=checkbox] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* Define tamanho e formato circular */
-  width: 20px;
-  height: 20px;
-  border: 2px solid #000;
-  border-radius: 50%;
-  /* Fundo branco inicialmente */
-  background-color: #fff;
-  /* Cursor de ponteiro para indicar clicável */
-  cursor: pointer;
-  /* Transição suave para a mudança de cor */
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
 
-.atributo input[type="checkbox"]:checked {
-  background-color: #000;
-  /* Preenchido de preto */
-  border-color: #000;
-  /* Borda preta */
-}
+
+
+
+
 
 .small {
   font-size: 0.8rem;

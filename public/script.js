@@ -55,6 +55,21 @@ function preencherFormulario(dados) {
   }
 }
 
+const impulsosCheckboxes = document.querySelectorAll('.checkbox-impulso');
+impulsosCheckboxes.forEach(cb => {
+  cb.addEventListener('change', () => {
+    // Código específico para impulsos
+    console.log('Impulso alterado:', cb.name, cb.checked);
+  });
+});
+
+const acoesCheckboxes = document.querySelectorAll('.checkbox-acao');
+acoesCheckboxes.forEach(cb => {
+  cb.addEventListener('change', () => {
+    // Código específico para ações
+    console.log('Ação alterada:', cb);
+  });
+});
 
 // Função para gerar checkboxes para uma categoria
 function gerarMarcasCategoria(categoriaDiv, quantidade) {

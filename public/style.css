@@ -176,7 +176,7 @@ body {
   /* Transforma em círculo */
   width: 10px;
   height: 20px;
-  border: 1px solid #000000;
+  border: 2px solid #000000;
   cursor: pointer;
   vertical-align: middle;
 }
@@ -186,7 +186,46 @@ body {
   border-color: #000000;
 }
 
+.dourado-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #000000; 
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 8px;
+  transform: rotate(45deg);
+  transition: background-color 0.3s
+}
 
+/* Quando o checkbox estiver marcado */
+.dourado-checkbox:checked {
+  background-color: #b8860b; /* fundo dourado */
+}
+
+.checkbox-acao {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000000; 
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 6px;
+  transition: background-color 0.3s             /* ajusta levemente para baixo para alinhar */
+  
+}
+
+.checkbox-acao:checked {
+  background-color: #000;
+}
 
 
 

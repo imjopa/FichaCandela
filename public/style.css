@@ -215,28 +215,6 @@ body {
   border-color: #000;
 }
 
-.impulsos-maximo {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  margin-top: 6px;
-}
-.impulsos-maximo .bola {
-  width: 10px;
-  height: 10px;
-  background-color: #ccc; /* cor padrão das bolinhas */
-  border-radius: 50%;
-  border: 1px solid #000;
-  cursor: default;
-  transition: background-color 0.3s ease;
-}
-/* Bolinhas ativas (que indicam impulsos disponíveis) */
-.impulsos-maximo .bola.ativa {
-  background-color: #ffbf00; /* cor destacada */
-  border-color: #ffbf00;
-}
-
-
 /* Seleciona o primeiro input (o da label Mover) dentro de .atributo */
 .atributo label input:first-of-type {
   /* Altere o formato com CSS */

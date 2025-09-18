@@ -195,7 +195,7 @@ body {
 }
 
 .max-impulsos-control input {
-  
+
   font-size: 1rem;
   border: 1px solid #000;
   border-radius: 3px;
@@ -206,8 +206,10 @@ body {
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  max-width: 280px; /* ajusta conforme o espaço disponível */
-  margin: 0 auto; /* centraliza horizontalmente */
+  max-width: 280px;
+  /* ajusta conforme o espaço disponível */
+  margin: 0 auto;
+  /* centraliza horizontalmente */
 }
 
 .impulsos-checkboxes input[type="checkbox"] {
@@ -229,32 +231,38 @@ body {
   background-color: transparent;
   transition: background-color 0.2s ease;
 }
+
 /* Quando marcado, deixa o quadrado totalmente preto */
 .checkbox-impulso:checked {
   background-color: #000;
   border-color: #000;
 }
+
 /* Remove o foco padrão e adiciona um contorno personalizado */
 .checkbox-impulso:focus {
   outline: none;
-  box-shadow: 0 0 3px 2px rgba(0,0,0,0.5);
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.5);
 }
 
 .separador-impulsos-acoes {
   border: none;
-  border-top: 2px solid #000; /* linha preta */
-  margin: 10px 0 15px 0; /* espaçamento acima e abaixo */
+  border-top: 2px solid #000;
+  /* linha preta */
+  margin: 10px 0 15px 0;
+  /* espaçamento acima e abaixo */
   width: 100%;
 }
 
 .max-impulsos-control {
-  flex: 0 0 auto; /* Tamanho fixo */
+  flex: 0 0 auto;
+  /* Tamanho fixo */
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
 }
+
 .max-impulsos-control input {
   width: 50px;
   padding: 4px;
@@ -268,7 +276,7 @@ body {
   -webkit-appearance: none;
   width: 15px;
   height: 15px;
-  border: 2px solid #000000; 
+  border: 2px solid #000000;
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
@@ -281,11 +289,12 @@ body {
 
 /* Quando o checkbox estiver marcado */
 .dourado-checkbox:checked {
-  background-color: #b8860b; /* fundo dourado */
+  background-color: #b8860b;
+  /* fundo dourado */
 }
 
 .checkbox-acao {
- appearance: none;
+  appearance: none;
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
@@ -297,10 +306,11 @@ body {
   align-items: center;
   justify-content: center;
   margin-right: 6px;
-  vertical-align: baseline; /* ou remova */
+  vertical-align: baseline;
+  /* ou remova */
   transition: background-color 0.3s;
   /* Removido position: relative */
-  
+
 }
 
 .checkbox-acao:checked {
@@ -605,7 +615,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .section.cicatrizes input[type="checkbox"]:checked {
   background-color: #473030;
-  border-color:#4d1d1d;
+  border-color: #4d1d1d;
   box-shadow: 0 0 8px #ff0000;
 }
 
@@ -856,10 +866,102 @@ button[type="submit"]:hover {
   background: #222;
 }
 
+/* --- Estilos para o Modal de Sucesso --- */
+.modal-sucesso {
+  display: none;
+  /* Escondido por padrão */
+  position: fixed;
+  /* Fica sobre o conteúdo */
+  z-index: 1001;
+  /* Acima do modal de dados, se houver */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Permite rolagem se o conteúdo for muito grande */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Fundo escuro semi-transparente */
+  font-family: "Jim Nightshade", cursive;
+}
+
+.modal-content-sucesso {
+  background-color: #f5f5f5;
+  /* Cor de fundo clara */
+  margin: 15% auto;
+  /* Centraliza vertical e horizontalmente */
+  padding: 30px 40px;
+  border: 2px solid #000;
+  width: 80%;
+  /* Largura padrão */
+  max-width: 400px;
+  /* Largura máxima */
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+  /* Para posicionar o botão de fechar */
+}
+
+.fechar-sucesso {
+  color: #000;
+  float: right;
+  font-size: 2rem;
+  font-weight: 900;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.fechar-sucesso:hover,
+.fechar-sucesso:focus {
+  color: #ffbf00;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.titulo-sucesso {
+  font-family: "Jim Nightshade", cursive;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #000;
+  margin-top: 0;
+  margin-bottom: 15px;
+  letter-spacing: 0.05em;
+}
+
+.texto-sucesso {
+  font-family: "Cormorant Unicase", serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.btn-ok-sucesso {
+  font-family: "Jim Nightshade", cursive;
+  padding: 12px 30px;
+  font-weight: 900;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-ok-sucesso:hover {
+  background-color: #ffbf00;
+  color: #000;
+}
+
 /* --- MEDIA QUERY PARA TELAS MENORES (TABLETS E CELULARES) --- */
 @media screen and (max-width: 768px) {
   .ficha {
-    padding: 10px; /* Reduzir padding geral da ficha */
+    padding: 10px;
+    /* Reduzir padding geral da ficha */
   }
 
   .ficha-header {
@@ -872,31 +974,40 @@ button[type="submit"]:hover {
   }
 
   .header-buttons {
-    flex-direction: column; /* Empilha os botões */
-    align-items: stretch; /* Estica para preencher a largura */
+    flex-direction: column;
+    /* Empilha os botões */
+    align-items: stretch;
+    /* Estica para preencher a largura */
     gap: 8px;
   }
 
   .btn-simulador,
   .btn-logout {
-    width: 100%; /* Ocupa a largura total */
-    margin-left: 0; /* Remove margem extra */
+    width: 100%;
+    /* Ocupa a largura total */
+    margin-left: 0;
+    /* Remove margem extra */
   }
 
   .menu-simulador {
-    width: calc(100% - 20px); /* Ajusta a largura do menu do simulador */
-    left: 10px !important; /* Alinha à esquerda da ficha */
-    right: 10px; /* Alinha à direita da ficha */
+    width: calc(100% - 20px);
+    /* Ajusta a largura do menu do simulador */
+    left: 10px !important;
+    /* Alinha à esquerda da ficha */
+    right: 10px;
+    /* Alinha à direita da ficha */
     box-sizing: border-box;
   }
 
   .dados-gerais {
-    flex-direction: column; /* Empilha os campos de dados gerais */
+    flex-direction: column;
+    /* Empilha os campos de dados gerais */
     gap: 10px;
   }
 
   .dados-gerais label {
-    flex: 1 1 100%; /* Ocupa a largura total */
+    flex: 1 1 100%;
+    /* Ocupa a largura total */
     font-size: 1.3rem;
   }
 
@@ -905,8 +1016,10 @@ button[type="submit"]:hover {
   }
 
   .atributos {
-    flex-direction: column; /* Empilha os atributos */
-    gap: 15px; /* Reduz o espaçamento entre eles */
+    flex-direction: column;
+    /* Empilha os atributos */
+    gap: 15px;
+    /* Reduz o espaçamento entre eles */
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -928,8 +1041,10 @@ button[type="submit"]:hover {
   }
 
   .impulsos-checkboxes {
-    max-width: 100%; /* Permite que o container de checkboxes ocupe toda a largura */
-    justify-content: flex-start; /* Alinha à esquerda */
+    max-width: 100%;
+    /* Permite que o container de checkboxes ocupe toda a largura */
+    justify-content: flex-start;
+    /* Alinha à esquerda */
     gap: 8px;
   }
 
@@ -953,7 +1068,8 @@ button[type="submit"]:hover {
   }
 
   .papel-especialidade {
-    flex-direction: column; /* Empilha as habilidades de papel e especialidade */
+    flex-direction: column;
+    /* Empilha as habilidades de papel e especialidade */
     gap: 20px;
     margin-bottom: 20px;
   }
@@ -964,22 +1080,28 @@ button[type="submit"]:hover {
 
   .papel-especialidade textarea {
     font-size: 1.1rem;
-    min-height: 100px; /* Altura mínima para textareas */
+    min-height: 100px;
+    /* Altura mínima para textareas */
     box-sizing: border-box;
   }
 
   .marcas-cicatrizes-container {
-    flex-direction: column; /* Empilha marcas e cicatrizes */
+    flex-direction: column;
+    /* Empilha marcas e cicatrizes */
     gap: 20px;
     margin-bottom: 20px;
   }
 
   .section.marcas,
   .section.cicatrizes {
-    flex: 1 1 auto; /* Permite que ocupem a largura total disponível */
-    max-width: 100%; /* Garante que não transbordem */
-    max-height: none; /* Remove limite de altura para que o conteúdo se ajuste */
-    overflow-y: visible; /* Permite que o conteúdo se expanda */
+    flex: 1 1 auto;
+    /* Permite que ocupem a largura total disponível */
+    max-width: 100%;
+    /* Garante que não transbordem */
+    max-height: none;
+    /* Remove limite de altura para que o conteúdo se ajuste */
+    overflow-y: visible;
+    /* Permite que o conteúdo se expanda */
   }
 
   .header-black h2 {
@@ -1000,8 +1122,10 @@ button[type="submit"]:hover {
   }
 
   .marcas-lista {
-    flex-wrap: wrap; /* Permite que os checkboxes quebrem linha */
-    justify-content: center; /* Centraliza os checkboxes */
+    flex-wrap: wrap;
+    /* Permite que os checkboxes quebrem linha */
+    justify-content: center;
+    /* Centraliza os checkboxes */
     gap: 6px;
   }
 
@@ -1011,8 +1135,10 @@ button[type="submit"]:hover {
   }
 
   .linha-cicatriz {
-    flex-direction: column; /* Empilha label e input */
-    align-items: flex-start; /* Alinha à esquerda */
+    flex-direction: column;
+    /* Empilha label e input */
+    align-items: flex-start;
+    /* Alinha à esquerda */
     gap: 5px;
     font-size: 1.1rem;
   }
@@ -1027,22 +1153,28 @@ button[type="submit"]:hover {
   }
 
   .linha-cicatriz input[type="text"] {
-    width: 100%; /* Ocupa a largura total */
+    width: 100%;
+    /* Ocupa a largura total */
     font-size: 1rem;
   }
 
   .relacionamentos-e-equipamento-container {
-    flex-direction: column; /* Empilha relacionamentos e equipamento */
+    flex-direction: column;
+    /* Empilha relacionamentos e equipamento */
     gap: 20px;
     margin-top: 20px;
   }
 
   .subsection.relacionamentos,
   .subsection.equipamento {
-    width: 100%; /* Ocupa a largura total */
-    margin-right: 0; /* Remove margem extra */
-    min-height: auto; /* Remove altura mínima fixa */
-    max-height: 300px; /* Limita a altura para scroll */
+    width: 100%;
+    /* Ocupa a largura total */
+    margin-right: 0;
+    /* Remove margem extra */
+    min-height: auto;
+    /* Remove altura mínima fixa */
+    max-height: 300px;
+    /* Limita a altura para scroll */
   }
 
   .subsection h3 {
@@ -1055,7 +1187,8 @@ button[type="submit"]:hover {
   }
 
   .notas-e-circulo-container {
-    flex-direction: column; /* Empilha notas e habilidades de círculo */
+    flex-direction: column;
+    /* Empilha notas e habilidades de círculo */
     gap: 20px;
     margin-top: 20px;
   }
@@ -1063,22 +1196,53 @@ button[type="submit"]:hover {
   .subsection.notas textarea,
   .subsection.habilidades-circulo textarea {
     font-size: 1.1rem;
-    min-height: 150px; /* Altura mínima para textareas */
+    min-height: 150px;
+    /* Altura mínima para textareas */
   }
 
   button[type="submit"] {
-    width: 100%; /* Botão de salvar ocupa a largura total */
+    width: 100%;
+    /* Botão de salvar ocupa a largura total */
     font-size: 1.2rem;
     padding: 12px 0;
   }
 
   .modal-content {
-    width: 90%; /* Ajusta a largura do modal */
-    margin: 10% auto; /* Ajusta a posição do modal */
+    width: 90%;
+    /* Ajusta a largura do modal */
+    margin: 10% auto;
+    /* Ajusta a posição do modal */
     font-size: 1.2rem;
   }
 
   .resultado-dado-text {
     font-size: 2rem;
   }
+}
+
+.modal-content-sucesso {
+  width: 90%;
+  /* Ocupa mais largura em telas pequenas */
+  margin: 20% auto;
+  /* Ajusta a margem para centralizar melhor */
+  padding: 20px 25px;
+}
+
+.titulo-sucesso {
+  font-size: 1.8rem;
+}
+
+.texto-sucesso {
+  font-size: 1.2rem;
+}
+
+.btn-ok-sucesso {
+  font-size: 1.3rem;
+  padding: 10px 25px;
+}
+
+.fechar-sucesso {
+  font-size: 1.5rem;
+  top: 5px;
+  right: 10px;
 }

@@ -26,6 +26,12 @@ const btnNovaFicha = document.getElementById('btnNovaFicha');
 // Certifique-se de que o ID do botão de salvar no HTML é 'btnSalvarFichaForm' ou ajuste aqui
 const logoutBtn = document.getElementById('logoutBtn'); // Obtenha o botão de logout aqui
 
+const modalSucesso = document.getElementById('modalSucesso');
+const fecharModalSucessoBtn = document.getElementById('fecharModalSucesso');
+const btnOkSucesso = document.getElementById('btnOkSucesso');
+const mensagemSucesso = document.getElementById('mensagemSucesso');
+
+
 let currentUser = null;
 let fichaSelecionadaId = null;
 console.log('SCRIPT INICIADO: fichaSelecionadaId =', fichaSelecionadaId);
@@ -332,6 +338,27 @@ menuSimuladorDados.querySelectorAll('button').forEach(botao => {
   });
 });
 
+function mostrarModalSucesso(mensagem) {
+  mensagemSucesso.textContent = mensagem;
+  modalSucesso.style.display = 'block';
+}
+
+function fecharModalSucesso() {
+  modalSucesso.style.display = 'none';
+}
+
+// Adiciona event listeners para fechar o modal
+fecharModalSucessoBtn.addEventListener('click', fecharModalSucesso);
+btnOkSucesso.addEventListener('click', fecharModalSucesso);
+
+// Fecha o modal se clicar fora dele
+window.addEventListener('click', (event) => {
+  if (event.target === modalSucesso) {
+    fecharModalSucesso();
+  }
+});
+
+
 
 // --- Funções de Gerenciamento de Fichas (Listar, Carregar, Nova, Salvar) ---
 
@@ -504,11 +531,11 @@ async function salvarFicha() {
       const docRef = await addDoc(fichasRef, dados);
       fichaSelecionadaId = docRef.id;
     }
-    alert('Ficha salva com sucesso!');
+    mostrarModalSucesso('Ficha salva com sucesso!');
     listarFichas(); // Atualiza a lista de fichas
   } catch (error) {
     console.error('Erro ao salvar ficha:', error);
-    alert('Erro ao salvar ficha: ' + error.message);
+    mostrarModalSucesso('Erro ao salvar ficha: ' + error.message);
   }
 }
 

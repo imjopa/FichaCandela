@@ -134,6 +134,19 @@ async function salvarFicha() {
   }
   const userId = auth.currentUser.uid;
 
+//Salvar Impulsos
+  function coletarImpulsos() {
+    const impulsos = {};
+
+    ['corpo', 'astucia', 'intuicao'].forEach(atributo => {
+      const checkboxes = document.querySelectorAll(`#${atributo} .impulsos-checkboxes input[type="checkbox"]`);
+      impulsos[atributo] = Array.from(checkboxes).map(cb => cb.checked);
+    });
+
+    return impulsos;
+  }
+
+
   // Coleta dados do formulário
   const formData = new FormData(fichaForm);
   const data = {};
@@ -245,6 +258,72 @@ async function carregarFicha(id) {
     // Liga o evento change para controlar a marcação dos checkboxes
     document.querySelectorAll('.checkbox-impulso').forEach(checkbox => {
       checkbox.addEventListener('change', controlarCheckboxes);
+    });
+
+    // Impulsos
+    document.addEventListener('DOMContentLoaded', () => {
+      // Função para limitar checkboxes de impulsos
+      function limitarImpulsos(atributo) {
+        const maxInput = document.querySelector(`.max-impulsos-input[data-atributo="${atributo}"]`);
+        const checkboxes = document.querySelectorAll(`#${atributo} .impulsos-checkboxes input[type="checkbox"]`);
+
+        // Atualiza o estado dos checkboxes conforme o valor máximo
+        function atualizarLimite() {
+          const max = parseInt(maxInput.value, 10) || 1;
+          let checkedCount = 0;
+
+          checkboxes.forEach(cb => {
+            if (cb.checked) checkedCount++;
+          });
+
+          checkboxes.forEach(cb => {
+            // Se já atingiu o máximo e o checkbox não está marcado, desabilita ele
+            if (!cb.checked && checkedCount >= max) {
+              cb.disabled = true;
+            } else {
+              cb.disabled = false;
+            }
+          });
+        }
+
+        // Evento para quando o valor do input mudar
+        maxInput.addEventListener('input', () => {
+          // Se o valor for menor que o número de checkboxes marcados, desmarca os extras
+          const max = parseInt(maxInput.value, 10) || 1;
+          let checkedCount = 0;
+
+          for (const cb of checkboxes) {
+            if (cb.checked) {
+              checkedCount++;
+              if (checkedCount > max) {
+                cb.checked = false;
+              }
+            }
+          }
+          atualizarLimite();
+        });
+
+        // Evento para quando um checkbox for clicado
+        checkboxes.forEach(cb => {
+          cb.addEventListener('change', () => {
+            const max = parseInt(maxInput.value, 10) || 1;
+            const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+
+            if (checkedCount > max) {
+              // Se ultrapassar o limite, desmarca o checkbox e opcionalmente alerta
+              cb.checked = false;
+              alert(`Você só pode marcar até ${max} impulsos para ${atributo}.`);
+            }
+            atualizarLimite();
+          });
+        });
+
+        // Inicializa o estado
+        atualizarLimite();
+      }
+
+      // Aplicar para cada atributo
+      ['corpo', 'astucia', 'intuicao'].forEach(limitarImpulsos);
     });
 
 

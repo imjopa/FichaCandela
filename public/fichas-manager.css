@@ -80,3 +80,29 @@
 .lista-fichas li button.btn-excluir:hover {
   color: darkred;
 }
+
+/* --- MEDIA QUERY PARA TELAS MENORES (TABLETS E CELULARES) --- */
+@media screen and (max-width: 768px) {
+  .fichas-manager {
+    padding: 10px 15px; /* Reduzir padding */
+    margin-bottom: 20px;
+  }
+  .fichas-manager h2 {
+    font-size: 1.5rem; /* Ajustar tamanho da fonte */
+    margin-bottom: 10px;
+  }
+  .lista-fichas {
+    max-height: 150px; /* Pode ser um pouco menor em celulares */
+  }
+  .lista-fichas li {
+    padding: 6px 10px; /* Reduzir padding */
+    font-size: 1.1rem; /* Ajustar tamanho da fonte */
+  }
+  .lista-fichas li button.btn-excluir {
+    font-size: 1rem; /* Ajustar tamanho do botão de excluir */
+  }
+  .btn-nova-ficha {
+    padding: 8px 0; /* Ajustar padding */
+    font-size: 1.3rem; /* Ajustar tamanho da fonte */
+  }
+}

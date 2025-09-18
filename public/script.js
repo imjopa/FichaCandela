@@ -372,6 +372,5 @@ onAuthStateChanged(auth, async (user) => {
      currentUser  = user;
      fichaSelecionadaId = null;
      novaFicha();
-     // await listarFichas();  // Remover esta linha
    });
    

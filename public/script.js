@@ -22,16 +22,18 @@ const db = getFirestore(app);
 const form = document.getElementById('fichaForm');
 const listaFichas = document.getElementById('listaFichas');
 const btnNovaFicha = document.getElementById('btnNovaFicha');
+
 // Certifique-se de que o ID do botão de salvar no HTML é 'btnSalvarFichaForm' ou ajuste aqui
-const btnSalvarFicha = document.getElementById('btnSalvarFichaForm'); 
 const logoutBtn = document.getElementById('logoutBtn'); // Obtenha o botão de logout aqui
 
 let currentUser = null;
 let fichaSelecionadaId = null;
+console.log('SCRIPT INICIADO: fichaSelecionadaId =', fichaSelecionadaId);
 
 // --- Funções de Limpeza e Preenchimento do Formulário ---
 
 function limparFormulario() {
+  console.log('limparFormulario() chamado. fichaSelecionadaId ANTES:', fichaSelecionadaId);
   form.reset(); // Reseta todos os campos do formulário
   fichaSelecionadaId = null; // Garante que não há ficha selecionada
   // Limpar campos dinâmicos ou específicos
@@ -39,6 +41,7 @@ function limparFormulario() {
   document.querySelector('textarea[name="especialidade"]').value = '';
   document.querySelector('.subsection.notas textarea').value = ''; // Corrigido o seletor
   document.querySelector('.subsection.habilidades-circulo textarea').value = ''; // Corrigido o seletor
+
 
   // Limpar campos de relacionamento e equipamento
   document.querySelectorAll('.lista-relacionamento input[type="text"]').forEach(input => input.value = '');
@@ -56,11 +59,22 @@ function limparFormulario() {
   document.querySelectorAll('.dourado-checkbox').forEach(cb => cb.checked = false);
   document.querySelectorAll('.checkbox-acao').forEach(cb => cb.checked = false);
   inicializarControleMaxImpulsos(); // Re-aplica a lógica de impulsos
+
+  console.log('limparFormulario() CONCLUÍDO. fichaSelecionadaId AGORA:', fichaSelecionadaId);
 }
 
+function resetarCamposFormulario() {
+  form.reset();
+  // Se precisar limpar campos extras manualmente, faça aqui
+  // Exemplo:
+  // inputNome.value = '';
+  // inputVida.value = '';
+  // ...
+}
 
 function preencherFormulario(dados) {
-  limparFormulario(); // Limpa tudo antes de preencher
+  console.log('preencherFormulario() chamado. fichaSelecionadaId ANTES:', fichaSelecionadaId);
+
 
   // 1. Dados Gerais
   form.elements['nome'].value = dados.nome || '';
@@ -176,6 +190,8 @@ function preencherFormulario(dados) {
   // 8. Notas e Habilidades de Círculo
   document.querySelector('.subsection.notas textarea').value = dados.notas || '';
   document.querySelector('.subsection.habilidades-circulo textarea').value = dados.habilidadesCirculo || '';
+
+  console.log('preencherFormulario() CONCLUÍDO. fichaSelecionadaId AGORA:', fichaSelecionadaId); // Deve ser null aqui
 }
 
 
@@ -372,6 +388,8 @@ async function listarFichas() {
 }
 
 async function carregarFicha(fichaId) {
+  console.log('carregarFicha() chamado para ID:', fichaId, 'fichaSelecionadaId ANTES:', fichaSelecionadaId);
+
   if (!currentUser) return;
 
   const fichaRef = doc(db, 'usuarios', currentUser.uid, 'fichas', fichaId);
@@ -383,6 +401,7 @@ async function carregarFicha(fichaId) {
     atualizarDestaqueLista();
   } else {
     alert('Ficha não encontrada.');
+    console.warn('Ficha não encontrada para ID:', fichaId);
   }
 }
 
@@ -526,6 +545,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
   currentUser = user;
+  console.log('onAuthStateChanged: Usuário logado. Resetando fichaSelecionadaId para null.');
   fichaSelecionadaId = null; // Garante que nenhuma ficha está selecionada ao logar
   await listarFichas(); // Lista as fichas do usuário
   // Se houver fichas, carrega a primeira ou a última selecionada
@@ -534,4 +554,5 @@ onAuthStateChanged(auth, async (user) => {
   } else {
     limparFormulario(); // Se não houver fichas, limpa o formulário
   }
+  console.log('onAuthStateChanged: Fim da inicialização. fichaSelecionadaId FINAL:', fichaSelecionadaId);
 });

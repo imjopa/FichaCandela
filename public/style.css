@@ -138,28 +138,15 @@ body {
   gap: 20px;
   margin-top: 25px;
   margin-bottom: 30px;
-  flex-wrap: wrap;
-  /* Adicione esta linha */
-  justify-content: center;
-  /* Opcional: centraliza os atributos quando quebram */
 }
 
 .atributo {
-  flex: 1 1 calc(33% - 20px); /* Permite que ocupe 1/3 da largura com gap */
-  min-width: 280px; /* Adicione esta linha: Garante uma largura mínima para cada atributo */
+  flex: 1;
   border: 2px solid #000;
   padding: 10px;
   font-weight: 700;
   background: #f5f5f5;
   font-size: 1.1rem;
-  box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
-}
-
-@media (max-width: 600px) {
-  .atributo {
-    flex: 1 1 100%; /* Ocupa a largura total em telas muito pequenas */
-    min-width: unset; /* Remove o min-width para permitir que encolha */
-  }
 }
 
 .atributo h2 {
@@ -208,7 +195,7 @@ body {
 }
 
 .max-impulsos-control input {
-
+  
   font-size: 1rem;
   border: 1px solid #000;
   border-radius: 3px;
@@ -219,10 +206,8 @@ body {
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  max-width: 280px;
-  /* ajusta conforme o espaço disponível */
-  margin: 0 auto;
-  /* centraliza horizontalmente */
+  max-width: 280px; /* ajusta conforme o espaço disponível */
+  margin: 0 auto; /* centraliza horizontalmente */
 }
 
 .impulsos-checkboxes input[type="checkbox"] {
@@ -244,38 +229,32 @@ body {
   background-color: transparent;
   transition: background-color 0.2s ease;
 }
-
 /* Quando marcado, deixa o quadrado totalmente preto */
 .checkbox-impulso:checked {
   background-color: #000;
   border-color: #000;
 }
-
 /* Remove o foco padrão e adiciona um contorno personalizado */
 .checkbox-impulso:focus {
   outline: none;
-  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 3px 2px rgba(0,0,0,0.5);
 }
 
 .separador-impulsos-acoes {
   border: none;
-  border-top: 2px solid #000;
-  /* linha preta */
-  margin: 10px 0 15px 0;
-  /* espaçamento acima e abaixo */
+  border-top: 2px solid #000; /* linha preta */
+  margin: 10px 0 15px 0; /* espaçamento acima e abaixo */
   width: 100%;
 }
 
 .max-impulsos-control {
-  flex: 0 0 auto;
-  /* Tamanho fixo */
+  flex: 0 0 auto; /* Tamanho fixo */
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
 }
-
 .max-impulsos-control input {
   width: 50px;
   padding: 4px;
@@ -289,7 +268,7 @@ body {
   -webkit-appearance: none;
   width: 15px;
   height: 15px;
-  border: 2px solid #000000;
+  border: 2px solid #000000; 
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
@@ -302,12 +281,11 @@ body {
 
 /* Quando o checkbox estiver marcado */
 .dourado-checkbox:checked {
-  background-color: #b8860b;
-  /* fundo dourado */
+  background-color: #b8860b; /* fundo dourado */
 }
 
 .checkbox-acao {
-  appearance: none;
+ appearance: none;
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
@@ -319,11 +297,10 @@ body {
   align-items: center;
   justify-content: center;
   margin-right: 6px;
-  vertical-align: baseline;
-  /* ou remova */
+  vertical-align: baseline; /* ou remova */
   transition: background-color 0.3s;
   /* Removido position: relative */
-
+  
 }
 
 .checkbox-acao:checked {
@@ -553,14 +530,13 @@ input[type=number]::-webkit-outer-spin-button {
   /* Espaço entre as sections, pode ajustar */
   margin-bottom: 30px;
   justify-content: flex-start;
-  flex-wrap: wrap;
   /* Alinha à esquerda */
 }
 
 .section.marcas,
 .section.cicatrizes {
-  flex: 1 1 calc(50% - 10px);
-  min-width: 300px; /* Adicione esta linha: Garante uma largura mínima para cada seção */
+  flex: 0 0 565px;
+  /* largura fixa de 280px, sem crescer ou encolher */
   box-sizing: border-box;
   padding: 10px;
   background-color: #0a0a0a;
@@ -570,14 +546,6 @@ input[type=number]::-webkit-outer-spin-button {
   max-height: 250px;
   overflow-y: auto;
   color: white;
-}
-
-@media (max-width: 600px) {
-  .section.marcas,
-  .section.cicatrizes {
-    flex: 1 1 100%; /* Ocupa a largura total em telas muito pequenas */
-    min-width: unset; /* Remove o min-width para permitir que encolha */
-  }
 }
 
 .header-black {
@@ -637,7 +605,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .section.cicatrizes input[type="checkbox"]:checked {
   background-color: #473030;
-  border-color: #4d1d1d;
+  border-color:#4d1d1d;
   box-shadow: 0 0 8px #ff0000;
 }
 
@@ -888,47 +856,38 @@ button[type="submit"]:hover {
   background: #222;
 }
 
-
-
 /* --- MEDIA QUERY PARA TELAS MENORES (TABLETS E CELULARES) --- */
 @media screen and (max-width: 768px) {
-  body {
-    padding: 10px; /* Reduzir padding para telas menores */
+  .ficha {
+    padding: 10px; /* Reduzir padding geral da ficha */
   }
 
-  .ficha {
-    padding: 15px; /* Reduzir padding interno da ficha */
+  .ficha-header {
+    gap: 10px;
   }
 
   .logo {
-    font-size: 1.8rem; /* Reduzir tamanho do logo */
-    letter-spacing: 0.1em;
+    font-size: 2rem;
     margin-bottom: 15px;
   }
 
   .header-buttons {
-    flex-direction: column; /* Empilha os botões verticalmente */
-    align-items: center; 
+    flex-direction: column; /* Empilha os botões */
+    align-items: stretch; /* Estica para preencher a largura */
     gap: 8px;
   }
 
   .btn-simulador,
   .btn-logout {
-   display: block;
-    margin: 0 auto 10px auto;
-    width: fit-content;
-    min-width: 150px;
+    width: 100%; /* Ocupa a largura total */
+    margin-left: 0; /* Remove margem extra */
   }
 
-  /* Ajuste o menu do simulador para aparecer corretamente em mobile */
   .menu-simulador {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 250px;
-    padding: 10px;
+    width: calc(100% - 20px); /* Ajusta a largura do menu do simulador */
+    left: 10px !important; /* Alinha à esquerda da ficha */
+    right: 10px; /* Alinha à direita da ficha */
+    box-sizing: border-box;
   }
 
   .dados-gerais {
@@ -937,33 +896,64 @@ button[type="submit"]:hover {
   }
 
   .dados-gerais label {
-    flex: unset; /* Remove a flexibilidade para ocupar a largura total */
-    font-size: 1.2rem;
+    flex: 1 1 100%; /* Ocupa a largura total */
+    font-size: 1.3rem;
   }
 
   .dados-gerais input {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  .atributos {
+    flex-direction: column; /* Empilha os atributos */
+    gap: 15px; /* Reduz o espaçamento entre eles */
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .atributo {
-    flex: 1 1 100%; /* Atributos ocupam a largura total */
-    min-width: unset; /* Remove largura mínima */
+    padding: 10px;
   }
+
   .atributo h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
-  .atributo label {
-    font-size: 1.2rem;
-  }
+
   .max-impulsos-control {
     font-size: 0.9rem;
   }
+
+  .max-impulsos-control input {
+    width: 40px;
+  }
+
   .impulsos-checkboxes {
-    max-width: 100%;
+    max-width: 100%; /* Permite que o container de checkboxes ocupe toda a largura */
+    justify-content: flex-start; /* Alinha à esquerda */
+    gap: 8px;
+  }
+
+  .checkbox-impulso {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dourado-checkbox {
+    width: 14px;
+    height: 14px;
+  }
+
+  .checkbox-acao {
+    width: 18px;
+    height: 18px;
+  }
+
+  .atributo label {
+    font-size: 1.3rem;
   }
 
   .papel-especialidade {
-    flex-direction: column; /* Papel e Especialidade empilham */
+    flex-direction: column; /* Empilha as habilidades de papel e especialidade */
     gap: 20px;
     margin-bottom: 20px;
   }
@@ -973,68 +963,86 @@ button[type="submit"]:hover {
   }
 
   .papel-especialidade textarea {
-        width: 100%; /* Ocupa toda a largura disponível */
-    max-width: 100%;
+    font-size: 1.1rem;
+    min-height: 100px; /* Altura mínima para textareas */
     box-sizing: border-box;
-    padding: 8px; /* Espaçamento interno confortável */
-    resize: vertical; /* Permite redimensionar verticalmente, mas não horizontalmente */
   }
 
   .marcas-cicatrizes-container {
-    flex-direction: column; /* Marcas e Cicatrizes empilham */
-    gap: 15px;
+    flex-direction: column; /* Empilha marcas e cicatrizes */
+    gap: 20px;
+    margin-bottom: 20px;
   }
 
   .section.marcas,
   .section.cicatrizes {
-    flex: 1 1 100%; /* Ocupam a largura total */
-    min-width: unset;
-    max-height: unset; /* Remove limite de altura */
+    flex: 1 1 auto; /* Permite que ocupem a largura total disponível */
+    max-width: 100%; /* Garante que não transbordem */
+    max-height: none; /* Remove limite de altura para que o conteúdo se ajuste */
     overflow-y: visible; /* Permite que o conteúdo se expanda */
   }
+
   .header-black h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
+
   .categoria h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
+
   .max-marcas-control {
     font-size: 0.8rem;
   }
-  .marcas-lista {
-    flex-wrap: wrap; /* Permite que os checkboxes de marcas quebrem */
-    justify-content: center;
+
+  .max-marcas-control input[type="number"] {
+    width: 40px;
+    font-size: 0.9rem;
   }
+
+  .marcas-lista {
+    flex-wrap: wrap; /* Permite que os checkboxes quebrem linha */
+    justify-content: center; /* Centraliza os checkboxes */
+    gap: 6px;
+  }
+
   .marcas-lista input[type="checkbox"] {
     width: 25px;
     height: 25px;
   }
+
   .linha-cicatriz {
-    flex-direction: column; /* Empilha label e input de descrição */
-    align-items: flex-start;
+    flex-direction: column; /* Empilha label e input */
+    align-items: flex-start; /* Alinha à esquerda */
+    gap: 5px;
     font-size: 1.1rem;
   }
+
   .linha-cicatriz label {
-    min-width: unset;
+    min-width: auto;
   }
+
+  .linha-cicatriz input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+  }
+
   .linha-cicatriz input[type="text"] {
-    width: 100%;
+    width: 100%; /* Ocupa a largura total */
+    font-size: 1rem;
   }
 
   .relacionamentos-e-equipamento-container {
-    flex-direction: column; /* Relacionamentos e Equipamento empilham */
-    gap: 15px;
-    margin-top: 15px;
+    flex-direction: column; /* Empilha relacionamentos e equipamento */
+    gap: 20px;
+    margin-top: 20px;
   }
 
   .subsection.relacionamentos,
   .subsection.equipamento {
-    flex: 1 1 100%; /* Ocupam a largura total */
-    min-height: unset;
-    max-height: unset;
-    overflow-y: visible;
-    width: 100%;
-    padding: 10px;
+    width: 100%; /* Ocupa a largura total */
+    margin-right: 0; /* Remove margem extra */
+    min-height: auto; /* Remove altura mínima fixa */
+    max-height: 300px; /* Limita a altura para scroll */
   }
 
   .subsection h3 {
@@ -1045,76 +1053,32 @@ button[type="submit"]:hover {
   .lista-equipamento input[type="text"] {
     font-size: 1rem;
   }
-  .lista-equipamento li {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 8px;
-  }
-  .lista-equipamento input[type="checkbox"] {
-    flex-shrink: 0;
-  }
 
   .notas-e-circulo-container {
-    flex-direction: column; /* Notas e Habilidades de Círculo empilham */
-    gap: 15px;
-    margin-top: 15px;
-  }
-
-  .subsection.notas,
-  .subsection.habilidades-circulo {
-    flex: 1 1 100%; /* Ocupam a largura total */
-    max-height: unset;
-    overflow-y: visible;
-    padding: 10px;
+    flex-direction: column; /* Empilha notas e habilidades de círculo */
+    gap: 20px;
+    margin-top: 20px;
   }
 
   .subsection.notas textarea,
   .subsection.habilidades-circulo textarea {
     font-size: 1.1rem;
-    min-height: 150px;
+    min-height: 150px; /* Altura mínima para textareas */
   }
 
   button[type="submit"] {
-    margin-top: 20px;
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    width: 100%; /* Ocupa a largura total */
+    width: 100%; /* Botão de salvar ocupa a largura total */
+    font-size: 1.2rem;
+    padding: 12px 0;
   }
 
   .modal-content {
-    width: 90%;
-    max-width: 300px;
-    margin: 10% auto;
-    padding: 15px 20px;
+    width: 90%; /* Ajusta a largura do modal */
+    margin: 10% auto; /* Ajusta a posição do modal */
     font-size: 1.2rem;
   }
+
   .resultado-dado-text {
     font-size: 2rem;
-  }
-}
-
-/* --- MEDIA QUERY PARA CELULARES MUITO PEQUENOS (OPCIONAL) --- */
-@media screen and (max-width: 480px) {
-  .logo {
-    font-size: 1.5rem;
-  }
-  .dados-gerais label,
-  .dados-gerais input,
-  .atributo h2,
-  .atributo label,
-  .papel-especialidade h3,
-  .papel-especialidade textarea,
-  .subsection h3,
-  .lista-relacionamento input[type="text"],
-  .lista-equipamento input[type="text"],
-  .linha-cicatriz,
-  .subsection.notas textarea,
-  .subsection.habilidades-circulo textarea,
-  button[type="submit"] {
-    font-size: 1rem; /* Reduzir ainda mais as fontes */
-  }
-  .resultado-dado-text {
-    font-size: 1.8rem;
   }
 }

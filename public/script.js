@@ -34,6 +34,11 @@ const mensagemSucesso = document.getElementById('mensagemSucesso');
 
 let currentUser = null;
 let fichaSelecionadaId = null;
+let resistencias = {
+  corpo: [],
+  astucia: [],
+  intuicao: []
+}; // Objeto para resistências por atributo
 console.log('SCRIPT INICIADO: fichaSelecionadaId =', fichaSelecionadaId);
 
 // --- Funções de Limpeza e Preenchimento do Formulário ---
@@ -65,6 +70,12 @@ function limparFormulario() {
   document.querySelectorAll('.dourado-checkbox').forEach(cb => cb.checked = false);
   document.querySelectorAll('.checkbox-acao').forEach(cb => cb.checked = false);
   inicializarControleMaxImpulsos(); // Re-aplica a lógica de impulsos
+
+  // Resetar resistências por atributo
+  resistencias = { corpo: [], astucia: [], intuicao: [] };
+  ['corpo', 'astucia', 'intuicao'].forEach(atributo => {
+    gerarResistenciasPorAtributo(atributo, 0);
+  });
 
   console.log('limparFormulario() CONCLUÍDO. fichaSelecionadaId AGORA:', fichaSelecionadaId);
 }
@@ -197,11 +208,95 @@ function preencherFormulario(dados) {
   document.querySelector('.subsection.notas textarea').value = dados.notas || '';
   document.querySelector('.subsection.habilidades-circulo textarea').value = dados.habilidadesCirculo || '';
 
+  // 9. Resistências por atributo
+  resistencias = dados.resistencias || { corpo: [], astucia: [], intuicao: [] };
+  // Recalcula e exibe para cada atributo (garante sincronia com impulsos carregados)
+  ['corpo', 'astucia', 'intuicao'].forEach(atributo => {
+    atualizarResistenciasPorAtributo(atributo);
+  });
+
   console.log('preencherFormulario() CONCLUÍDO. fichaSelecionadaId AGORA:', fichaSelecionadaId); // Deve ser null aqui
 }
 
+// --- Lógica de Resistências por Atributo ---
 
-// --- Lógica de Impulsos e Marcas (já existente, mas garantindo que está aqui) ---
+// Função para gerar os checkboxes de resistência para um atributo específico
+function gerarResistenciasPorAtributo(atributo, quantidade) {
+  const listaId = `listaResistencias${atributo.charAt(0).toUpperCase() + atributo.slice(1)}`; // ex: listaResistenciasCorpo
+  const lista = document.getElementById(listaId);
+  if (!lista) return;
+
+  lista.innerHTML = ''; // Limpa a lista existente
+
+  const arrayResistencias = resistencias[atributo];
+  for (let i = 0; i < quantidade; i++) {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = `resistencia_${atributo}_${i + 1}`;
+    checkbox.id = `resistencia_${atributo}_${i + 1}`;
+    checkbox.checked = arrayResistencias[i] || false;
+    checkbox.addEventListener('change', (e) => {
+      arrayResistencias[i] = e.target.checked; // Atualiza o array específico
+    });
+    li.appendChild(checkbox);
+    lista.appendChild(li);
+  }
+}
+
+   // Função para calcular o número de resistências para um atributo específico
+   function calcularResistenciasPorAtributo(atributo) {
+     const atributoDiv = document.getElementById(atributo);
+     const maxImpulsosInput = atributoDiv.querySelector('.max-impulsos-input');
+     if (!maxImpulsosInput) return 0; // Se não encontrar o input, retorna 0
+
+     let maxImpulsos = parseInt(maxImpulsosInput.value);
+     if (isNaN(maxImpulsos) || maxImpulsos < 1) maxImpulsos = 1;
+     if (maxImpulsos > 9) maxImpulsos = 9; // Limita como no controle de impulsos
+
+     return Math.floor(maxImpulsos / 3); // 1 resistência a cada 3 impulsos máximos
+   }
+   
+
+   // Função principal para atualizar as resistências de um atributo específico
+   function atualizarResistenciasPorAtributo(atributo) {
+     const numResistencias = calcularResistenciasPorAtributo(atributo);
+     const arrayResistencias = resistencias[atributo];
+
+     if (numResistencias === 0) {
+       arrayResistencias.length = 0; // Limpa o array se não houver resistências
+     } else {
+       // Ajusta o array: adiciona 'false' se necessário, ou trunca se menor
+       while (arrayResistencias.length < numResistencias) {
+         arrayResistencias.push(false);
+       }
+       arrayResistencias.length = numResistencias; // Trunca se necessário
+     }
+
+     gerarResistenciasPorAtributo(atributo, numResistencias);
+   }
+   
+
+// Função auxiliar para atualizar TODAS as resistências (usada na inicialização ou load)
+function atualizarTodasResistencias() {
+  ['corpo', 'astucia', 'intuicao'].forEach(atributo => {
+    atualizarResistenciasPorAtributo(atributo);
+  });
+}
+
+// --- Função auxiliar para impulsos (mova para global) ---
+function atualizarImpulsosPermitidos(checkboxes, max) {
+  checkboxes.forEach((cb, index) => {
+    if (index < max) {
+      cb.disabled = false;
+      cb.parentElement.style.opacity = '1';
+    } else {
+      cb.disabled = true;
+      cb.checked = false;
+      cb.parentElement.style.opacity = '0.4';
+    }
+  });
+}
 
 function inicializarControleMaxImpulsos() {
   const maxImpulsosInputs = document.querySelectorAll('.max-impulsos-input');
@@ -214,25 +309,19 @@ function inicializarControleMaxImpulsos() {
       if (max > 9) max = 9;
       input.value = max;
       atualizarImpulsosPermitidos(checkboxes, max);
+      atualizarResistenciasPorAtributo(atributo); // Atualiza só este atributo
     });
     let max = parseInt(input.value);
     if (isNaN(max) || max < 1) max = 1;
     if (max > 9) max = 9;
     atualizarImpulsosPermitidos(checkboxes, max);
-  });
-}
 
-function atualizarImpulsosPermitidos(checkboxes, max) {
-  checkboxes.forEach((cb, index) => {
-    if (index < max) {
-      cb.disabled = false;
-      cb.parentElement.style.opacity = '1';
-    } else {
-      cb.disabled = true;
-      cb.checked = false;
-      cb.parentElement.style.opacity = '0.4';
-    }
+    // Event listener para cada checkbox de impulso (só atualiza o atributo)
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => atualizarResistenciasPorAtributo(atributo));
+    });
   });
+  atualizarTodasResistencias(); // Inicializa todas as resistências uma vez
 }
 
 function gerarMarcasCategoria(categoriaDiv, quantidade) {
@@ -521,6 +610,9 @@ async function salvarFicha() {
   // 8. Notas e Habilidades de Círculo
   dados.notas = document.querySelector('.subsection.notas textarea').value;
   dados.habilidadesCirculo = document.querySelector('.subsection.habilidades-circulo textarea').value;
+
+  // 9. Resistências por atributo
+  dados.resistencias = resistencias; // Salva o objeto completo com estados por atributo
 
 
   try {

@@ -66,8 +66,6 @@
         <button id="logoutBtn" class="btn-logout">Logout</button>
       </div>
 
-      <!-- REMOVA ESTA LINHA: <div><button type="button" id="btnSalvarFicha">Salvar Ficha</button></div> -->
-
       <section id="fichasManager" class="fichas-manager">
         <h2>Minhas Fichas</h2>
         <ul id="listaFichas" class="lista-fichas">
@@ -132,7 +130,17 @@
                 type="checkbox" class="checkbox-acao"> <input type="checkbox" class="checkbox-acao"> <input
                 type="checkbox" class="checkbox-acao">
             </label>
+
+                       <!-- Resistências de Corpo -->
+            <div class="resistencias-subsecao">
+              <p class="resistencia-label">Resistências de Corpo (a cada 3 impulsos)</p>
+              <ul id="listaResistenciasCorpo" class="marcas-lista">
+                <!-- Checkboxes de resistência serão gerados aqui pelo JS -->
+              </ul>
+            </div>
+
           </div>
+
           <div class="atributo" id="astucia">
             <div class="titulo-impulsos-container">
               <div class="titulo-e-maximo">
@@ -178,6 +186,14 @@
                 type="checkbox" class="checkbox-acao"> <input type="checkbox" class="checkbox-acao"> <input
                 type="checkbox" class="checkbox-acao">
             </label>
+                        <!-- Resistências de Astúcia -->
+            <div class="resistencias-subsecao">
+              <p class="resistencia-label">Resistências de Astúcia (a cada 3 impulsos)</p>
+              <ul id="listaResistenciasAstucia" class="marcas-lista">
+                <!-- Checkboxes de resistência serão gerados aqui pelo JS -->
+              </ul>
+            </div>
+
           </div>
           <div class="atributo" id="intuicao">
             <div class="titulo-impulsos-container">
@@ -225,8 +241,17 @@
                 type="checkbox" class="checkbox-acao"> <input type="checkbox" class="checkbox-acao"> <input
                 type="checkbox" class="checkbox-acao">
             </label>
+                        <!-- Resistências de Intuição -->
+            <div class="resistencias-subsecao">
+              <p class="resistencia-label">Resistências de Intuição (a cada 3 impulsos)</p>
+              <ul id="listaResistenciasIntuicao" class="marcas-lista">
+                <!-- Checkboxes de resistência serão gerados aqui pelo JS -->
+              </ul>
+            </div>
+
           </div>
         </section>
+
 
         <!-- Papel e Especialidade -->
         <section class="papel-especialidade">
